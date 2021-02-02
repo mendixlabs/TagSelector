@@ -11,7 +11,7 @@
         <propertyGroup caption="Data source">
             <property key="tagLabel" type="attribute" >
                 <caption>TagNPE Label</caption>
-                <description>-</description>
+                <description>Label attribute of the TagNPE</description>
                 <attributeTypes>
                     <attributeType name="String"/>
                 </attributeTypes>
@@ -33,7 +33,7 @@
                 <description>Get all the current tags</description>
             </property>
             <property key="currentTagLabel" type="attribute" required="true" dataSource="currentTags">
-                <caption>Current tag label</caption>
+                <caption>Current tags label</caption>
                 <description>The label attribute of the tag object</description>
                 <attributeTypes>
                     <attributeType name="String"/>
