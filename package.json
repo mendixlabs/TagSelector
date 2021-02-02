@@ -1,0 +1,42 @@
+{
+  "name": "tagselector",
+  "widgetName": "TagSelector",
+  "version": "1.0.0",
+  "description": "Pluggable Mendix widget to select/delete/create objects and assign them to an existing object.",
+  "copyright": "2020 Mendix Technology BV",
+  "author": "Nick",
+  "config": {
+    "projectPath": "./tests/testProject/",
+    "mendixHost": "http://localhost:8080",
+    "developmentPort": "3000"
+  },
+  "packagePath": "mendix",
+  "scripts": {
+    "start": "pluggable-widgets-tools start:server --open",
+    "dev": "pluggable-widgets-tools start:web",
+    "build": "pluggable-widgets-tools build:web",
+    "lint": "pluggable-widgets-tools lint",
+    "lint:fix": "pluggable-widgets-tools lint:fix",
+    "test": "pluggable-widgets-tools test:unit:web --no-cache --ci",
+    "test:unit": "pluggable-widgets-tools test:unit:web --coverage",
+    "prerelease": "npm run lint",
+    "release": "pluggable-widgets-tools release:web"
+  },
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@mendix/pluggable-widgets-tools": "^8.14.0",
+    "@types/big.js": "^4.0.5",
+    "@types/classnames": "^2.2.4",
+    "@types/enzyme": "^3.1.10",
+    "@types/enzyme-adapter-react-16": "^1.0.2",
+    "@types/jest": "^24.0.0",
+    "@types/react": "~16.9.0",
+    "@types/react-dom": "~16.9.0",
+    "@types/react-select": "^4.0.7",
+    "@types/react-test-renderer": "~16.9.0"
+  },
+  "dependencies": {
+    "classnames": "^2.2.6",
+    "react-select": "^4.0.2"
+  }
+}
