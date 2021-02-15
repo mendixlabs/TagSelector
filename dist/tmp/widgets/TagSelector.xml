@@ -7,49 +7,56 @@
     <description>Pluggable Mendix widget to select/delete/create objects and assign them to an existing object.</description>
     <icon/>
     <properties>
-
         <propertyGroup caption="Data source">
             <property key="tagLabel" type="attribute" >
                 <caption>TagNPE Label</caption>
-                <description>Label attribute of the TagNPE</description>
+                <description>Label attribute of the TagNPE.</description>
                 <attributeTypes>
                     <attributeType name="String"/>
                 </attributeTypes>
             </property>
+            <property key="selectTag" type="action" >
+                <caption>Select tag microflow</caption>
+                <description>Microflow to be executed a tag is selected.</description>
+            </property>
             <property key="createTag" type="action" >
                 <caption>Create tag microflow</caption>
-                <description>Microflow to be executed a new tag is added</description>
+                <description>Microflow to be executed a new tag is added.</description>
             </property>
             <property key="removeTag" type="action" >
                 <caption>Remove tag microflow</caption>
-                <description>Microflow to be executed when a tag is deleted</description>
+                <description>Microflow to be executed when a tag is deleted.</description>
             </property>
             <property key="removeAllTags" type="action" >
                 <caption>Remove all tags microflow</caption>
-                <description>Microflow to be executed when all tags should be deleted</description>
+                <description>Microflow to be executed when all tags should be deleted.</description>
             </property>
             <property key="currentTags" type="datasource" isList="true" >
                 <caption>Current tags </caption>
-                <description>Get all the current tags</description>
+                <description>Get all the current tags.</description>
             </property>
             <property key="currentTagLabel" type="attribute" required="true" dataSource="currentTags">
                 <caption>Current tags label</caption>
-                <description>The label attribute of the tag object</description>
+                <description>The label attribute of the tag object.</description>
                 <attributeTypes>
                     <attributeType name="String"/>
                 </attributeTypes>
             </property>            
             <property key="tagSuggestions" type="datasource" isList="true" >
                 <caption>Tag suggestions</caption>
-                <description>All the tags you want to suggest as options</description>
+                <description>All the tags you want to suggest as options.</description>
             </property>
             <property key="tagSuggestionsLabel" type="attribute" required="true" dataSource="tagSuggestions">
                 <caption>Tag suggestions label</caption>
-                <description>The label attribute of the tag suggestions object</description>
+                <description>The label attribute of the tag suggestions object.</description>
                 <attributeTypes>
                     <attributeType name="String"/>
                 </attributeTypes>
-            </property> 
+            </property>
+            <property key="enableCreate" type="boolean" defaultValue="true">
+                <caption>Enable Create</caption>
+                <description>Enable the Tag Selector to create tags when none are found.</description>
+            </property>
         </propertyGroup>
 
         <propertyGroup caption="Styling">
@@ -59,17 +66,16 @@
             </property>
             <property key="placeholder" type="string" required="false">
                 <caption>Placeholder</caption>
-                <description>Placeholder text for when there are no labels</description>
+                <description>Placeholder text for when there are no labels.</description>
             </property>
                 <property key="className" type="string" required="false">
                 <caption>ClassName</caption>
-                <description>Custom class name</description>
+                <description>Custom class name.</description>
             </property>
                 <property key="classNamePrefix" type="string" required="false">
                 <caption>ClassNamePrefix</caption>
-                <description>Custom Class name prefix</description>
+                <description>Custom Class name prefix.</description>
             </property>
         </propertyGroup> 
-
     </properties>
 </widget>

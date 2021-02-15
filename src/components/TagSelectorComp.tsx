@@ -4,6 +4,7 @@ import "../ui/TagSelector.css";
 
 import makeAnimated from 'react-select/animated';
 import CreatableSelect from 'react-select/creatable';
+import Select from 'react-select'
 import { ListValue, EditableValue, ActionValue, ListAttributeValue } from "mendix";
 import { Styles } from 'react-select/src/styles';
 import { OptionTypeBase } from "react-select/src/types";
@@ -29,6 +30,7 @@ export interface Option {
     placeholder?: string;
     className?: string;
     classNamePrefix?: string;
+    selectTag?: ActionValue;
     createTag?: ActionValue;
     removeTag?: ActionValue;
     removeAllTags?: ActionValue;
@@ -38,6 +40,7 @@ export interface Option {
     tagSuggestions: ListValue;
     tagSuggestionsLabel: ListAttributeValue<string>;
     useDefaultStyle: boolean;
+    enableCreate: boolean;
 }
 
 export default function TagSelector(props: TagSelectComponentProps): ReactElement{
@@ -62,14 +65,30 @@ export default function TagSelector(props: TagSelectComponentProps): ReactElemen
   }, [props.tagSuggestions]);
 
   const handleChange = async (inputValue: any, actionMeta: any) => {
+    inputValue[inputValue.length - 1].label = inputValue[
+      inputValue.length - 1
+    ].label.toLowerCase();
     if (
-      actionMeta.action === 'create-option' ||
-      actionMeta.action === 'select-option'
+        actionMeta.action === 'select-option'
     ) {
       setIsLoading(true);
-      inputValue[inputValue.length - 1].label = inputValue[
-        inputValue.length - 1
-      ].label.toLowerCase();
+      try {
+        if(props.tagLabel.status==='available'){
+          props.tagLabel.setValue(inputValue[inputValue.length - 1].label);
+        }
+        if(props.selectTag.canExecute){
+          props.selectTag.execute();
+        }
+        setLabels(inputValue);
+      } catch (err) {
+        console.error('Failed to select a Tag: ' + err);
+      }
+      setIsLoading(false);
+    }
+    if (
+      actionMeta.action === 'create-option'
+    ) {
+      setIsLoading(true);
       try {
         if(props.tagLabel.status==='available'){
           props.tagLabel.setValue(inputValue[inputValue.length - 1].label);
@@ -79,7 +98,7 @@ export default function TagSelector(props: TagSelectComponentProps): ReactElemen
         }
         setLabels(inputValue);
       } catch (err) {
-        console.error('Failed to create a Label: ' + err);
+        console.error('Failed to create a Tag: ' + err);
       }
       setIsLoading(false);
     }
@@ -97,7 +116,7 @@ export default function TagSelector(props: TagSelectComponentProps): ReactElemen
         }
         setLabels(inputValue);
       } catch (err) {
-        console.error('Failed to remove a Label: ' + err);
+        console.error('Failed to remove a Tag: ' + err);
       }
       setIsLoading(false);
     }
@@ -109,7 +128,7 @@ export default function TagSelector(props: TagSelectComponentProps): ReactElemen
         }
         setLabels(inputValue);
       } catch (err) {
-        console.error('Failed to remove all Labels: ' + err);
+        console.error('Failed to remove all Tags: ' + err);
       }
       setIsLoading(false);
     }
@@ -143,20 +162,39 @@ export default function TagSelector(props: TagSelectComponentProps): ReactElemen
       valueContainer: () => ({}),
     };
   }
+  if(props.enableCreate){
+    return (
+      <CreatableSelect
+        isMulti
+        options={options}
+        value={labels}
+        onChange={handleChange}
+        isLoading={isLoading}
+        components={animatedComponents}
+        styles={styles}
+        placeholder={props.placeholder}
+        className={props.className!}
+        classNamePrefix={props.classNamePrefix}
+        tabSelectsValue={false}
+      />
+    );
+  }
+  else{
+    return (
+      <Select
+        isMulti
+        options={options}
+        value={labels}
+        onChange={handleChange}
+        isLoading={isLoading}
+        components={animatedComponents}
+        styles={styles}
+        placeholder={props.placeholder}
+        className={props.className!}
+        classNamePrefix={props.classNamePrefix}
+        tabSelectsValue={false}
+      />
+    );
+  }
 
-  return (
-    <CreatableSelect
-      isMulti
-      options={options}
-      value={labels}
-      onChange={handleChange}
-      isLoading={isLoading}
-      components={animatedComponents}
-      styles={styles}
-      placeholder={props.placeholder}
-      className={props.className!}
-      classNamePrefix={props.classNamePrefix}
-      tabSelectsValue={false}
-    />
-  );
 }

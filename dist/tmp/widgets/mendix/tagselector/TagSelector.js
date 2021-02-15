@@ -73,7 +73,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "f201856c2ba05344e6ba";
+/******/ 	var hotCurrentHash = "02e0a7c70dcbd1dfffe3";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -869,6 +869,70 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ({
 
+/***/ "./node_modules/@babel/runtime/helpers/arrayLikeToArray.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/arrayLikeToArray.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
+  }
+
+  return arr2;
+}
+
+module.exports = _arrayLikeToArray;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/arrayWithoutHoles.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/arrayWithoutHoles.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayLikeToArray = __webpack_require__(/*! ./arrayLikeToArray */ "./node_modules/@babel/runtime/helpers/arrayLikeToArray.js");
+
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) return arrayLikeToArray(arr);
+}
+
+module.exports = _arrayWithoutHoles;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/defineProperty.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/defineProperty.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+module.exports = _defineProperty;
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime/helpers/esm/arrayLikeToArray.js":
 /*!*********************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/esm/arrayLikeToArray.js ***!
@@ -1363,6 +1427,36 @@ module.exports = _extends;
 
 /***/ }),
 
+/***/ "./node_modules/@babel/runtime/helpers/iterableToArray.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/iterableToArray.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _iterableToArray(iter) {
+  if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);
+}
+
+module.exports = _iterableToArray;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/nonIterableSpread.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/nonIterableSpread.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+module.exports = _nonIterableSpread;
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime/helpers/objectWithoutProperties.js":
 /*!************************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/objectWithoutProperties.js ***!
@@ -1444,6 +1538,29 @@ module.exports = _taggedTemplateLiteral;
 
 /***/ }),
 
+/***/ "./node_modules/@babel/runtime/helpers/toConsumableArray.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/toConsumableArray.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayWithoutHoles = __webpack_require__(/*! ./arrayWithoutHoles */ "./node_modules/@babel/runtime/helpers/arrayWithoutHoles.js");
+
+var iterableToArray = __webpack_require__(/*! ./iterableToArray */ "./node_modules/@babel/runtime/helpers/iterableToArray.js");
+
+var unsupportedIterableToArray = __webpack_require__(/*! ./unsupportedIterableToArray */ "./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js");
+
+var nonIterableSpread = __webpack_require__(/*! ./nonIterableSpread */ "./node_modules/@babel/runtime/helpers/nonIterableSpread.js");
+
+function _toConsumableArray(arr) {
+  return arrayWithoutHoles(arr) || iterableToArray(arr) || unsupportedIterableToArray(arr) || nonIterableSpread();
+}
+
+module.exports = _toConsumableArray;
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime/helpers/typeof.js":
 /*!*******************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/typeof.js ***!
@@ -1468,6 +1585,28 @@ function _typeof(obj) {
 }
 
 module.exports = _typeof;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js":
+/*!***************************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js ***!
+  \***************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayLikeToArray = __webpack_require__(/*! ./arrayLikeToArray */ "./node_modules/@babel/runtime/helpers/arrayLikeToArray.js");
+
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return arrayLikeToArray(o, minLen);
+}
+
+module.exports = _unsupportedIterableToArray;
 
 /***/ }),
 
@@ -9640,6 +9779,123 @@ var defaultComponents = function defaultComponents(props) {
 
 /***/ }),
 
+/***/ "./node_modules/react-select/dist/react-select.browser.esm.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/react-select/dist/react-select.browser.esm.js ***!
+  \********************************************************************/
+/*! exports provided: components, createFilter, defaultTheme, mergeStyles, default, NonceProvider */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NonceProvider", function() { return NonceProvider; });
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/extends.js");
+/* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/esm/classCallCheck */ "./node_modules/@babel/runtime/helpers/esm/classCallCheck.js");
+/* harmony import */ var _babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/esm/createClass */ "./node_modules/@babel/runtime/helpers/esm/createClass.js");
+/* harmony import */ var _babel_runtime_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/esm/inherits */ "./node_modules/@babel/runtime/helpers/esm/inherits.js");
+/* harmony import */ var _babel_runtime_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime/helpers/esm/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/esm/possibleConstructorReturn.js");
+/* harmony import */ var _babel_runtime_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @babel/runtime/helpers/esm/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/esm/getPrototypeOf.js");
+/* harmony import */ var _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ "./node_modules/@babel/runtime/helpers/toConsumableArray.js");
+/* harmony import */ var _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _emotion_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @emotion/react */ "./node_modules/@emotion/react/dist/emotion-react.browser.esm.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-dom */ "react-dom");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @babel/runtime/helpers/typeof */ "./node_modules/@babel/runtime/helpers/typeof.js");
+/* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _index_8b64410c_browser_esm_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./index-8b64410c.browser.esm.js */ "./node_modules/react-select/dist/index-8b64410c.browser.esm.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "components", function() { return _index_8b64410c_browser_esm_js__WEBPACK_IMPORTED_MODULE_12__["E"]; });
+
+/* harmony import */ var _Select_d53e3329_browser_esm_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./Select-d53e3329.browser.esm.js */ "./node_modules/react-select/dist/Select-d53e3329.browser.esm.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "createFilter", function() { return _Select_d53e3329_browser_esm_js__WEBPACK_IMPORTED_MODULE_13__["c"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "defaultTheme", function() { return _Select_d53e3329_browser_esm_js__WEBPACK_IMPORTED_MODULE_13__["a"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "mergeStyles", function() { return _Select_d53e3329_browser_esm_js__WEBPACK_IMPORTED_MODULE_13__["m"]; });
+
+/* harmony import */ var _babel_runtime_helpers_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @babel/runtime/helpers/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/objectWithoutProperties.js");
+/* harmony import */ var _babel_runtime_helpers_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var _babel_runtime_helpers_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @babel/runtime/helpers/taggedTemplateLiteral */ "./node_modules/@babel/runtime/helpers/taggedTemplateLiteral.js");
+/* harmony import */ var _babel_runtime_helpers_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_15__);
+/* harmony import */ var react_input_autosize__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! react-input-autosize */ "./node_modules/react-input-autosize/lib/AutosizeInput.js");
+/* harmony import */ var react_input_autosize__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(react_input_autosize__WEBPACK_IMPORTED_MODULE_16__);
+/* harmony import */ var _stateManager_66a21f68_browser_esm_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./stateManager-66a21f68.browser.esm.js */ "./node_modules/react-select/dist/stateManager-66a21f68.browser.esm.js");
+/* harmony import */ var _emotion_cache__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @emotion/cache */ "./node_modules/@emotion/cache/dist/emotion-cache.browser.esm.js");
+/* harmony import */ var memoize_one__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! memoize-one */ "./node_modules/memoize-one/dist/memoize-one.esm.js");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = Object(_babel_runtime_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6__["default"])(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = Object(_babel_runtime_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6__["default"])(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return Object(_babel_runtime_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_5__["default"])(this, result); }; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+var NonceProvider = /*#__PURE__*/function (_Component) {
+  Object(_babel_runtime_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_4__["default"])(NonceProvider, _Component);
+
+  var _super = _createSuper(NonceProvider);
+
+  function NonceProvider(props) {
+    var _this;
+
+    Object(_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_2__["default"])(this, NonceProvider);
+
+    _this = _super.call(this, props);
+
+    _this.createEmotionCache = function (nonce, key) {
+      return Object(_emotion_cache__WEBPACK_IMPORTED_MODULE_18__["default"])({
+        nonce: nonce,
+        key: key
+      });
+    };
+
+    _this.createEmotionCache = Object(memoize_one__WEBPACK_IMPORTED_MODULE_19__["default"])(_this.createEmotionCache);
+    return _this;
+  }
+
+  Object(_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_3__["default"])(NonceProvider, [{
+    key: "render",
+    value: function render() {
+      var emotionCache = this.createEmotionCache(this.props.nonce, this.props.cacheKey);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_emotion_react__WEBPACK_IMPORTED_MODULE_9__["CacheProvider"], {
+        value: emotionCache
+      }, this.props.children);
+    }
+  }]);
+
+  return NonceProvider;
+}(react__WEBPACK_IMPORTED_MODULE_8__["Component"]);
+
+var index = Object(_stateManager_66a21f68_browser_esm_js__WEBPACK_IMPORTED_MODULE_17__["m"])(_Select_d53e3329_browser_esm_js__WEBPACK_IMPORTED_MODULE_13__["S"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (index);
+
+
+
+/***/ }),
+
 /***/ "./node_modules/react-select/dist/stateManager-66a21f68.browser.esm.js":
 /*!*****************************************************************************!*\
   !*** ./node_modules/react-select/dist/stateManager-66a21f68.browser.esm.js ***!
@@ -12424,7 +12680,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function TagSelector(props) {
-    return Object(react__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_components_TagSelectorComp__WEBPACK_IMPORTED_MODULE_1__["default"], { placeholder: props.placeholder, className: props.className, classNamePrefix: props.classNamePrefix, tagLabel: props.tagLabel, createTag: props.createTag, removeTag: props.removeTag, removeAllTags: props.removeAllTags, currentTags: props.currentTags, currentTagLabel: props.currentTagLabel, tagSuggestions: props.tagSuggestions, tagSuggestionsLabel: props.tagSuggestionsLabel, useDefaultStyle: props.useDefaultStyle });
+    return Object(react__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_components_TagSelectorComp__WEBPACK_IMPORTED_MODULE_1__["default"], { placeholder: props.placeholder, className: props.className, classNamePrefix: props.classNamePrefix, tagLabel: props.tagLabel, selectTag: props.selectTag, createTag: props.createTag, removeTag: props.removeTag, removeAllTags: props.removeAllTags, currentTags: props.currentTags, currentTagLabel: props.currentTagLabel, tagSuggestions: props.tagSuggestions, tagSuggestionsLabel: props.tagSuggestionsLabel, useDefaultStyle: props.useDefaultStyle, enableCreate: props.enableCreate });
 }
 
 
@@ -12446,6 +12702,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ui_TagSelector_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_ui_TagSelector_css__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_select_animated__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-select/animated */ "./node_modules/react-select/animated/dist/react-select.browser.esm.js");
 /* harmony import */ var react_select_creatable__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-select/creatable */ "./node_modules/react-select/creatable/dist/react-select.browser.esm.js");
+/* harmony import */ var react_select__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-select */ "./node_modules/react-select/dist/react-select.browser.esm.js");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -12486,6 +12743,7 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+
 var createOption = function (label) { return ({
     label: label.toLowerCase(),
     value: label.toLowerCase().replace(/\W/g, ''),
@@ -12514,10 +12772,25 @@ function TagSelector(props) {
     }, [props.tagSuggestions]);
     var handleChange = function (inputValue, actionMeta) { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
-            if (actionMeta.action === 'create-option' ||
-                actionMeta.action === 'select-option') {
+            inputValue[inputValue.length - 1].label = inputValue[inputValue.length - 1].label.toLowerCase();
+            if (actionMeta.action === 'select-option') {
                 setIsLoading(true);
-                inputValue[inputValue.length - 1].label = inputValue[inputValue.length - 1].label.toLowerCase();
+                try {
+                    if (props.tagLabel.status === 'available') {
+                        props.tagLabel.setValue(inputValue[inputValue.length - 1].label);
+                    }
+                    if (props.selectTag.canExecute) {
+                        props.selectTag.execute();
+                    }
+                    setLabels(inputValue);
+                }
+                catch (err) {
+                    console.error('Failed to select a Tag: ' + err);
+                }
+                setIsLoading(false);
+            }
+            if (actionMeta.action === 'create-option') {
+                setIsLoading(true);
                 try {
                     if (props.tagLabel.status === 'available') {
                         props.tagLabel.setValue(inputValue[inputValue.length - 1].label);
@@ -12528,7 +12801,7 @@ function TagSelector(props) {
                     setLabels(inputValue);
                 }
                 catch (err) {
-                    console.error('Failed to create a Label: ' + err);
+                    console.error('Failed to create a Tag: ' + err);
                 }
                 setIsLoading(false);
             }
@@ -12545,7 +12818,7 @@ function TagSelector(props) {
                     setLabels(inputValue);
                 }
                 catch (err) {
-                    console.error('Failed to remove a Label: ' + err);
+                    console.error('Failed to remove a Tag: ' + err);
                 }
                 setIsLoading(false);
             }
@@ -12558,7 +12831,7 @@ function TagSelector(props) {
                     setLabels(inputValue);
                 }
                 catch (err) {
-                    console.error('Failed to remove all Labels: ' + err);
+                    console.error('Failed to remove all Tags: ' + err);
                 }
                 setIsLoading(false);
             }
@@ -12592,7 +12865,12 @@ function TagSelector(props) {
             valueContainer: function () { return ({}); },
         };
     }
-    return (Object(react__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_select_creatable__WEBPACK_IMPORTED_MODULE_3__["default"], { isMulti: true, options: options, value: labels, onChange: handleChange, isLoading: isLoading, components: animatedComponents, styles: styles, placeholder: props.placeholder, className: props.className, classNamePrefix: props.classNamePrefix, tabSelectsValue: false }));
+    if (props.enableCreate) {
+        return (Object(react__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_select_creatable__WEBPACK_IMPORTED_MODULE_3__["default"], { isMulti: true, options: options, value: labels, onChange: handleChange, isLoading: isLoading, components: animatedComponents, styles: styles, placeholder: props.placeholder, className: props.className, classNamePrefix: props.classNamePrefix, tabSelectsValue: false }));
+    }
+    else {
+        return (Object(react__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_select__WEBPACK_IMPORTED_MODULE_4__["default"], { isMulti: true, options: options, value: labels, onChange: handleChange, isLoading: isLoading, components: animatedComponents, styles: styles, placeholder: props.placeholder, className: props.className, classNamePrefix: props.classNamePrefix, tabSelectsValue: false }));
+    }
 }
 
 

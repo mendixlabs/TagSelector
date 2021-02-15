@@ -1,4 +1,4 @@
-import { Component, ReactNode, createElement, ReactElement } from "react";
+import { createElement, ReactElement } from "react";
 import TagSelect from "./components/TagSelectorComp";
 
 import { TagSelectorContainerProps } from "../typings/TagSelectorProps";
@@ -11,6 +11,7 @@ export default function TagSelector(props: TagSelectorContainerProps): ReactElem
                     className={props.className}
                     classNamePrefix={props.classNamePrefix}
                     tagLabel={props.tagLabel}
+                    selectTag={props.selectTag}
                     createTag={props.createTag}
                     removeTag={props.removeTag}
                     removeAllTags={props.removeAllTags}
@@ -19,5 +20,6 @@ export default function TagSelector(props: TagSelectorContainerProps): ReactElem
                     tagSuggestions={props.tagSuggestions}
                     tagSuggestionsLabel={props.tagSuggestionsLabel}
                     useDefaultStyle={props.useDefaultStyle}
+                    enableCreate={props.enableCreate}
                 />;
 }

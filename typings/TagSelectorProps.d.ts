@@ -12,6 +12,7 @@ export interface TagSelectorContainerProps {
     style?: CSSProperties;
     tabIndex: number;
     tagLabel: EditableValue<string>;
+    selectTag?: ActionValue;
     createTag?: ActionValue;
     removeTag?: ActionValue;
     removeAllTags?: ActionValue;
@@ -19,6 +20,7 @@ export interface TagSelectorContainerProps {
     currentTagLabel: ListAttributeValue<string>;
     tagSuggestions: ListValue;
     tagSuggestionsLabel: ListAttributeValue<string>;
+    enableCreate: boolean;
     useDefaultStyle: boolean;
     placeholder: string;
     className: string;
@@ -29,6 +31,7 @@ export interface TagSelectorPreviewProps {
     class: string;
     style: string;
     tagLabel: string;
+    selectTag: {} | null;
     createTag: {} | null;
     removeTag: {} | null;
     removeAllTags: {} | null;
@@ -36,6 +39,7 @@ export interface TagSelectorPreviewProps {
     currentTagLabel: string;
     tagSuggestions: {} | null;
     tagSuggestionsLabel: string;
+    enableCreate: boolean;
     useDefaultStyle: boolean;
     placeholder: string;
     className: string;
