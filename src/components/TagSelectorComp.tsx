@@ -41,6 +41,7 @@ export interface Option {
     tagSuggestionsLabel: ListAttributeValue<string>;
     useDefaultStyle: boolean;
     enableCreate: boolean;
+    animatedDelete: boolean;
 }
 
 export default function TagSelector(props: TagSelectComponentProps): ReactElement{
@@ -65,13 +66,13 @@ export default function TagSelector(props: TagSelectComponentProps): ReactElemen
   }, [props.tagSuggestions]);
 
   const handleChange = async (inputValue: any, actionMeta: any) => {
-    inputValue[inputValue.length - 1].label = inputValue[
-      inputValue.length - 1
-    ].label.toLowerCase();
     if (
         actionMeta.action === 'select-option'
     ) {
       setIsLoading(true);
+      inputValue[inputValue.length - 1].label = inputValue[
+        inputValue.length - 1
+      ].label.toLowerCase();
       try {
         if(props.tagLabel.status==='available'){
           props.tagLabel.setValue(inputValue[inputValue.length - 1].label);
@@ -89,6 +90,9 @@ export default function TagSelector(props: TagSelectComponentProps): ReactElemen
       actionMeta.action === 'create-option'
     ) {
       setIsLoading(true);
+      inputValue[inputValue.length - 1].label = inputValue[
+        inputValue.length - 1
+      ].label.toLowerCase();
       try {
         if(props.tagLabel.status==='available'){
           props.tagLabel.setValue(inputValue[inputValue.length - 1].label);
@@ -170,7 +174,7 @@ export default function TagSelector(props: TagSelectComponentProps): ReactElemen
         value={labels}
         onChange={handleChange}
         isLoading={isLoading}
-        components={animatedComponents}
+        components={props.animatedDelete ? animatedComponents : undefined}
         styles={styles}
         placeholder={props.placeholder}
         className={props.className!}
@@ -187,7 +191,7 @@ export default function TagSelector(props: TagSelectComponentProps): ReactElemen
         value={labels}
         onChange={handleChange}
         isLoading={isLoading}
-        components={animatedComponents}
+        components={props.animatedDelete ? animatedComponents : undefined}
         styles={styles}
         placeholder={props.placeholder}
         className={props.className!}

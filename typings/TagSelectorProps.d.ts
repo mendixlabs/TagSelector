@@ -25,6 +25,7 @@ export interface TagSelectorContainerProps {
     placeholder: string;
     className: string;
     classNamePrefix: string;
+    animatedDelete: boolean;
 }
 
 export interface TagSelectorPreviewProps {
@@ -44,4 +45,5 @@ export interface TagSelectorPreviewProps {
     placeholder: string;
     className: string;
     classNamePrefix: string;
+    animatedDelete: boolean;
 }

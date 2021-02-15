@@ -73,7 +73,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "02e0a7c70dcbd1dfffe3";
+/******/ 	var hotCurrentHash = "ff3fa5da369f536b5fda";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -12680,7 +12680,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function TagSelector(props) {
-    return Object(react__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_components_TagSelectorComp__WEBPACK_IMPORTED_MODULE_1__["default"], { placeholder: props.placeholder, className: props.className, classNamePrefix: props.classNamePrefix, tagLabel: props.tagLabel, selectTag: props.selectTag, createTag: props.createTag, removeTag: props.removeTag, removeAllTags: props.removeAllTags, currentTags: props.currentTags, currentTagLabel: props.currentTagLabel, tagSuggestions: props.tagSuggestions, tagSuggestionsLabel: props.tagSuggestionsLabel, useDefaultStyle: props.useDefaultStyle, enableCreate: props.enableCreate });
+    return Object(react__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_components_TagSelectorComp__WEBPACK_IMPORTED_MODULE_1__["default"], { placeholder: props.placeholder, className: props.className, classNamePrefix: props.classNamePrefix, tagLabel: props.tagLabel, selectTag: props.selectTag, createTag: props.createTag, removeTag: props.removeTag, removeAllTags: props.removeAllTags, currentTags: props.currentTags, currentTagLabel: props.currentTagLabel, tagSuggestions: props.tagSuggestions, tagSuggestionsLabel: props.tagSuggestionsLabel, useDefaultStyle: props.useDefaultStyle, enableCreate: props.enableCreate, animatedDelete: props.animatedDelete });
 }
 
 
@@ -12772,9 +12772,9 @@ function TagSelector(props) {
     }, [props.tagSuggestions]);
     var handleChange = function (inputValue, actionMeta) { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
-            inputValue[inputValue.length - 1].label = inputValue[inputValue.length - 1].label.toLowerCase();
             if (actionMeta.action === 'select-option') {
                 setIsLoading(true);
+                inputValue[inputValue.length - 1].label = inputValue[inputValue.length - 1].label.toLowerCase();
                 try {
                     if (props.tagLabel.status === 'available') {
                         props.tagLabel.setValue(inputValue[inputValue.length - 1].label);
@@ -12791,6 +12791,7 @@ function TagSelector(props) {
             }
             if (actionMeta.action === 'create-option') {
                 setIsLoading(true);
+                inputValue[inputValue.length - 1].label = inputValue[inputValue.length - 1].label.toLowerCase();
                 try {
                     if (props.tagLabel.status === 'available') {
                         props.tagLabel.setValue(inputValue[inputValue.length - 1].label);
@@ -12866,10 +12867,10 @@ function TagSelector(props) {
         };
     }
     if (props.enableCreate) {
-        return (Object(react__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_select_creatable__WEBPACK_IMPORTED_MODULE_3__["default"], { isMulti: true, options: options, value: labels, onChange: handleChange, isLoading: isLoading, components: animatedComponents, styles: styles, placeholder: props.placeholder, className: props.className, classNamePrefix: props.classNamePrefix, tabSelectsValue: false }));
+        return (Object(react__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_select_creatable__WEBPACK_IMPORTED_MODULE_3__["default"], { isMulti: true, options: options, value: labels, onChange: handleChange, isLoading: isLoading, components: props.animatedDelete ? animatedComponents : undefined, styles: styles, placeholder: props.placeholder, className: props.className, classNamePrefix: props.classNamePrefix, tabSelectsValue: false }));
     }
     else {
-        return (Object(react__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_select__WEBPACK_IMPORTED_MODULE_4__["default"], { isMulti: true, options: options, value: labels, onChange: handleChange, isLoading: isLoading, components: animatedComponents, styles: styles, placeholder: props.placeholder, className: props.className, classNamePrefix: props.classNamePrefix, tabSelectsValue: false }));
+        return (Object(react__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_select__WEBPACK_IMPORTED_MODULE_4__["default"], { isMulti: true, options: options, value: labels, onChange: handleChange, isLoading: isLoading, components: props.animatedDelete ? animatedComponents : undefined, styles: styles, placeholder: props.placeholder, className: props.className, classNamePrefix: props.classNamePrefix, tabSelectsValue: false }));
     }
 }
 

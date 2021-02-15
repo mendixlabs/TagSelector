@@ -76,6 +76,10 @@
                 <caption>ClassNamePrefix</caption>
                 <description>Custom Class name prefix.</description>
             </property>
+            <property key="animatedDelete" type="boolean" defaultValue="true">
+                <caption>Animated Delete</caption>
+                <description>Animation while deleting a tag.</description>
+            </property>
         </propertyGroup> 
     </properties>
 </widget>
