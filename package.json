@@ -20,7 +20,8 @@
     "test": "pluggable-widgets-tools test:unit:web --no-cache --ci",
     "test:unit": "pluggable-widgets-tools test:unit:web --coverage",
     "prerelease": "npm run lint",
-    "release": "pluggable-widgets-tools release:web"
+    "release": "pluggable-widgets-tools release:web",
+    "preinstall": "npx npm-force-resolutions"
   },
   "license": "Apache-2.0",
   "devDependencies": {
