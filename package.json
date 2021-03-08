@@ -37,11 +37,6 @@
     "@types/react-test-renderer": "~16.9.0"
   },
   "dependencies": {
-    "classnames": "^2.2.6",
-    "npm-force-resolutions": "^0.0.3",
-    "react-select": "^4.0.2"
-  },
-  "resolutions": {
-    "lodash": "4.17.21"
+    "react-select": "^4.2.1"
   }
 }
