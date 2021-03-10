@@ -1,4 +1,5 @@
 [![Known Vulnerabilities](https://snyk.io/test/github/mendixlabs/TagSelector/badge.svg?targetFile=package.json)](https://snyk.io/test/github/mendixlabs/TagSelector?targetFile=package.json)
+[![Support](https://img.shields.io/badge/Mendix%20Support%3A-Community-green.svg)](https://docs.mendix.com/community/app-store/app-store-content-support)
 
 ## TagSelector
 The Tag Selector is a pluggable widget that implements the popular react-select library for Mendix. It allows both for the creation and selection of tags (or any other object). The widget is setup so all the logic for selection/creation/deletion/retrieval can happen in Mendix.
