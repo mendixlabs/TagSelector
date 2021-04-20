@@ -10,7 +10,7 @@ import { Styles } from 'react-select/src/styles';
 import { OptionTypeBase } from "react-select/src/types";
 
 const createOption = (label: string) => ({
-    label: label.toLowerCase(),
+    label: label,
     value: label.toLowerCase().replace(/\W/g, ''),
   });
 
@@ -42,6 +42,7 @@ export interface Option {
     useDefaultStyle: boolean;
     enableCreate: boolean;
     animatedDelete: boolean;
+    disabled: boolean;
 }
 
 export default function TagSelector(props: TagSelectComponentProps): ReactElement{
@@ -72,7 +73,7 @@ export default function TagSelector(props: TagSelectComponentProps): ReactElemen
       setIsLoading(true);
       inputValue[inputValue.length - 1].label = inputValue[
         inputValue.length - 1
-      ].label.toLowerCase();
+      ].label;
       try {
         if(props.tagLabel.status==='available'){
           props.tagLabel.setValue(inputValue[inputValue.length - 1].label);
@@ -92,7 +93,7 @@ export default function TagSelector(props: TagSelectComponentProps): ReactElemen
       setIsLoading(true);
       inputValue[inputValue.length - 1].label = inputValue[
         inputValue.length - 1
-      ].label.toLowerCase();
+      ].label;
       try {
         if(props.tagLabel.status==='available'){
           props.tagLabel.setValue(inputValue[inputValue.length - 1].label);
@@ -180,6 +181,7 @@ export default function TagSelector(props: TagSelectComponentProps): ReactElemen
         className={props.className!}
         classNamePrefix={props.classNamePrefix}
         tabSelectsValue={false}
+        isDisabled={props.disabled}
       />
     );
   }
@@ -197,6 +199,7 @@ export default function TagSelector(props: TagSelectComponentProps): ReactElemen
         className={props.className!}
         classNamePrefix={props.classNamePrefix}
         tabSelectsValue={false}
+        isDisabled={props.disabled}
       />
     );
   }

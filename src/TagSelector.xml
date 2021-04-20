@@ -8,6 +8,7 @@
     <icon/>
     <properties>
         <propertyGroup caption="Data source">
+            <systemProperty key="Label"/>
             <property key="tagLabel" type="attribute" >
                 <caption>TagNPE Label</caption>
                 <description>Label attribute of the TagNPE.</description>
@@ -81,5 +82,8 @@
                 <description>Animation while deleting a tag.</description>
             </property>
         </propertyGroup> 
+        <propertyGroup caption="Editability">
+            <systemProperty key="Editability"/>
+        </propertyGroup>
     </properties>
 </widget>
