@@ -66,6 +66,8 @@ export default function TagSelector(props: TagSelectComponentProps): ReactElemen
   }, [props.tagSuggestions]);
 
   const handleChange = async (inputValue: any, actionMeta: any) => {
+    console.log(inputValue)
+    console.log(actionMeta)
     if (
         actionMeta.action === 'select-option'
     ) {
