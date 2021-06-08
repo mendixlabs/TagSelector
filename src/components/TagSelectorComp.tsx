@@ -21,6 +21,14 @@ export interface Label {
     value: string;
 }
 
+enum Actions {
+    Select = "select-option",
+    Create = "create-option",
+    Clear = "clear",
+    Remove = "remove-value",
+    Pop = "pop-value"
+}
+
 export interface TagSelectComponentProps {
     placeholder?: string;
     className?: string;
@@ -66,75 +74,23 @@ export default function TagSelector(props: TagSelectComponentProps): ReactElemen
     }, [props.tagSuggestions]);
 
     const handleChange = async (inputValue: any, actionMeta: any) => {
-        if (
-            actionMeta.action === 'select-option'
-        ) {
-            setIsLoading(true);
-            inputValue[inputValue.length - 1].label = props.toLowercase ?
-                inputValue[inputValue.length - 1].label.toLowerCase() :
-                inputValue[inputValue.length - 1].label;
-            try {
-                if (props.tagLabel.status === 'available') {
-                    props.tagLabel.setValue(inputValue[inputValue.length - 1].label);
-                }
-                if (props.selectTag.canExecute) {
-                    props.selectTag.execute();
-                }
-                setLabels(inputValue);
-            } catch (err) {
-                console.error('Failed to select a Tag: ' + err);
+        switch (actionMeta.action) {
+            case Actions.Select: {
+                selectAction(inputValue);
+                break;
             }
-            setIsLoading(false);
-        }
-        if (
-            actionMeta.action === 'create-option'
-        ) {
-            setIsLoading(true);
-            inputValue[inputValue.length - 1].label = props.toLowercase ?
-                inputValue[inputValue.length - 1].label.toLowerCase() :
-                inputValue[inputValue.length - 1].label;
-            try {
-                if (props.tagLabel.status === 'available') {
-                    props.tagLabel.setValue(inputValue[inputValue.length - 1].label);
-                }
-                if (props.createTag.canExecute) {
-                    props.createTag.execute();
-                }
-                setLabels(inputValue);
-            } catch (err) {
-                console.error('Failed to create a Tag: ' + err);
+            case Actions.Create: {
+                createAction(inputValue);
+                break;
             }
-            setIsLoading(false);
-        }
-        if (
-            actionMeta.action === 'remove-value' ||
-            actionMeta.action === 'pop-value'
-        ) {
-            setIsLoading(true);
-            try {
-                if (props.tagLabel.status === 'available') {
-                    props.tagLabel.setValue(actionMeta.removedValue.label);
-                }
-                if (props.removeTag.canExecute) {
-                    props.removeTag.execute();
-                }
-                setLabels(inputValue);
-            } catch (err) {
-                console.error('Failed to remove a Tag: ' + err);
+            case Actions.Remove || Actions.Pop: {
+                removeAction(actionMeta, inputValue);
+                break;
             }
-            setIsLoading(false);
-        }
-        if (actionMeta.action === 'clear') {
-            setIsLoading(true);
-            try {
-                if (props.removeAllTags.canExecute) {
-                    props.removeAllTags.execute();
-                }
-                setLabels(inputValue);
-            } catch (err) {
-                console.error('Failed to remove all Tags: ' + err);
+            case Actions.Clear: {
+                clearAction();
+                break;
             }
-            setIsLoading(false);
         }
     };
 
@@ -201,4 +157,71 @@ export default function TagSelector(props: TagSelectComponentProps): ReactElemen
         );
     }
 
+
+    function clearAction() {
+        setIsLoading(true);
+        try {
+            if (props.removeAllTags.canExecute) {
+                props.removeAllTags.execute();
+            }
+            setLabels([]);
+        } catch (err) {
+            console.error('Failed to remove all Tags: ' + err);
+        }
+        setIsLoading(false);
+    }
+
+    function removeAction(actionMeta: any, inputValue: any) {
+        setIsLoading(true);
+        try {
+            if (props.tagLabel.status === 'available') {
+                props.tagLabel.setValue(actionMeta.removedValue.label);
+            }
+            if (props.removeTag.canExecute) {
+                props.removeTag.execute();
+            }
+            setLabels(inputValue);
+        } catch (err) {
+            console.error('Failed to remove a Tag: ' + err);
+        }
+        setIsLoading(false);
+    }
+
+    function createAction(inputValue: any) {
+        setIsLoading(true);
+        inputValue[inputValue.length - 1].label = props.toLowercase ?
+            inputValue[inputValue.length - 1].label.toLowerCase() :
+            inputValue[inputValue.length - 1].label;
+        try {
+            if (props.tagLabel.status === 'available') {
+                props.tagLabel.setValue(inputValue[inputValue.length - 1].label);
+            }
+            if (props.createTag.canExecute) {
+                props.createTag.execute();
+            }
+            setLabels(inputValue);
+        } catch (err) {
+            console.error('Failed to create a Tag: ' + err);
+        }
+        setIsLoading(false);
+    }
+
+    function selectAction(inputValue: any) {
+        setIsLoading(true);
+        inputValue[inputValue.length - 1].label = props.toLowercase ?
+            inputValue[inputValue.length - 1].label.toLowerCase() :
+            inputValue[inputValue.length - 1].label;
+        try {
+            if (props.tagLabel.status === 'available') {
+                props.tagLabel.setValue(inputValue[inputValue.length - 1].label);
+            }
+            if (props.selectTag.canExecute) {
+                props.selectTag.execute();
+            }
+            setLabels(inputValue);
+        } catch (err) {
+            console.error('Failed to select a Tag: ' + err);
+        }
+        setIsLoading(false);
+    }
 }
