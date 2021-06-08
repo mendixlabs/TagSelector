@@ -37,6 +37,6 @@
     "@types/react-test-renderer": "~16.9.0"
   },
   "dependencies": {
-    "react-select": "^4.2.1"
+    "react-select": "^4.3.1"
   }
 }
