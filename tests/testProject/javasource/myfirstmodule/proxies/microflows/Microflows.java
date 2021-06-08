@@ -28,6 +28,11 @@ public class Microflows
 		IMendixObject result = (IMendixObject)Core.microflowCall("MyFirstModule.SUB_GetOrCreateTag").withParams(params).execute(context);
 		return result == null ? null : myfirstmodule.proxies.Tag.initialize(context, result);
 	}
+	public static void urlencode(IContext context)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		Core.microflowCall("MyFirstModule.urlencode").withParams(params).execute(context);
+	}
 	public static java.util.List<myfirstmodule.proxies.Tag> widget_GetCurrentTags(IContext context, myfirstmodule.proxies.Entity _entity)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();

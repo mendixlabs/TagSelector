@@ -13,6 +13,7 @@ export default function TagSelector(props: TagSelectorContainerProps): ReactElem
                     tagLabel={props.tagLabel}
                     selectTag={props.selectTag}
                     createTag={props.createTag}
+                    toLowercase={props.toLowercase}
                     removeTag={props.removeTag}
                     removeAllTags={props.removeAllTags}
                     currentTags={props.currentTags}

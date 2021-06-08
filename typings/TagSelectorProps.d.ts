@@ -14,6 +14,7 @@ export interface TagSelectorContainerProps {
     tagLabel: EditableValue<string>;
     selectTag?: ActionValue;
     createTag?: ActionValue;
+    toLowercase: boolean;
     removeTag?: ActionValue;
     removeAllTags?: ActionValue;
     currentTags: ListValue;
@@ -34,6 +35,7 @@ export interface TagSelectorPreviewProps {
     tagLabel: string;
     selectTag: {} | null;
     createTag: {} | null;
+    toLowercase: boolean;
     removeTag: {} | null;
     removeAllTags: {} | null;
     currentTags: {} | null;
