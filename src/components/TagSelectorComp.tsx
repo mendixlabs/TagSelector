@@ -40,6 +40,7 @@ export interface TagSelectComponentProps {
     useDefaultStyle: boolean;
     enableCreate: boolean;
     animatedDelete: boolean;
+    disabled: boolean;
 }
 
 export default function TagSelector(props: TagSelectComponentProps): ReactElement {
@@ -131,6 +132,7 @@ export default function TagSelector(props: TagSelectComponentProps): ReactElemen
                 className={props.className!}
                 classNamePrefix={props.classNamePrefix}
                 tabSelectsValue={false}
+                isDisabled={props.disabled}
             />
         );
     }
@@ -148,6 +150,7 @@ export default function TagSelector(props: TagSelectComponentProps): ReactElemen
                 className={props.className!}
                 classNamePrefix={props.classNamePrefix}
                 tabSelectsValue={false}
+                isDisabled={props.disabled}
             />
         );
     }

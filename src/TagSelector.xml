@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="mendix.tagselector.TagSelector" pluginWidget="true" needsEntityContext="true" offlineCapable="true"
-        supportedPlatform="Web"
-        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+<widget id="mendix.tagselector.TagSelector" pluginWidget="true" needsEntityContext="true" offlineCapable="true" supportedPlatform="Web"
+    xmlns="http://www.mendix.com/widget/1.0/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
     <name>Tag Selector</name>
     <description>Pluggable Mendix widget to select/delete/create objects and assign them to an existing object.</description>
     <icon/>
     <properties>
         <propertyGroup caption="Data source">
-            <property key="tagLabel" type="attribute" >
+            <systemProperty key="Label"/>
+            <property key="tagLabel" type="attribute">
                 <caption>TagNPE Label</caption>
                 <description>Label attribute of the TagNPE.</description>
                 <attributeTypes>
                     <attributeType name="String"/>
                 </attributeTypes>
             </property>
-            <property key="selectTag" type="action" >
+            <property key="selectTag" type="action">
                 <caption>Select tag microflow</caption>
                 <description>Microflow to be executed a tag is selected.</description>
             </property>
-            <property key="createTag" type="action" >
+            <property key="createTag" type="action">
                 <caption>Create tag microflow</caption>
                 <description>Microflow to be executed a new tag is added.</description>
             </property>
-            <property key="removeTag" type="action" >
+            <property key="removeTag" type="action">
                 <caption>Remove tag microflow</caption>
                 <description>Microflow to be executed when a tag is deleted.</description>
             </property>
-            <property key="removeAllTags" type="action" >
+            <property key="removeAllTags" type="action">
                 <caption>Remove all tags microflow</caption>
                 <description>Microflow to be executed when all tags should be deleted.</description>
             </property>
-            <property key="currentTags" type="datasource" isList="true" >
+            <property key="currentTags" type="datasource" isList="true">
                 <caption>Current tags </caption>
                 <description>Get all the current tags.</description>
             </property>
@@ -41,8 +41,8 @@
                 <attributeTypes>
                     <attributeType name="String"/>
                 </attributeTypes>
-            </property>            
-            <property key="tagSuggestions" type="datasource" isList="true" >
+            </property>
+            <property key="tagSuggestions" type="datasource" isList="true">
                 <caption>Tag suggestions</caption>
                 <description>All the tags you want to suggest as options.</description>
             </property>
@@ -68,11 +68,11 @@
                 <caption>Placeholder</caption>
                 <description>Placeholder text for when there are no labels.</description>
             </property>
-                <property key="className" type="string" required="false">
+            <property key="className" type="string" required="false">
                 <caption>ClassName</caption>
                 <description>Custom class name.</description>
             </property>
-                <property key="classNamePrefix" type="string" required="false">
+            <property key="classNamePrefix" type="string" required="false">
                 <caption>ClassNamePrefix</caption>
                 <description>Custom Class name prefix.</description>
             </property>
@@ -80,6 +80,9 @@
                 <caption>Animated Delete</caption>
                 <description>Animation while deleting a tag.</description>
             </property>
-        </propertyGroup> 
+        </propertyGroup>
+        <propertyGroup caption="Editability">
+            <systemProperty key="Editability"/>
+        </propertyGroup>
     </properties>
 </widget>

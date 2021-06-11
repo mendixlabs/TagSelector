@@ -22,5 +22,6 @@ export default function TagSelector(props: TagSelectorContainerProps): ReactElem
                     useDefaultStyle={props.useDefaultStyle}
                     enableCreate={props.enableCreate}
                     animatedDelete={props.animatedDelete}
+                    disabled={props.tagLabel.readOnly}
                 />;
 }
