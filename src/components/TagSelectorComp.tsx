@@ -1,22 +1,17 @@
-import { useState, createElement, ReactElement, useEffect } from "react";
+import { createElement, ReactElement } from "react";
 
 import "../ui/TagSelector.css";
 
 import makeAnimated from 'react-select/animated';
 import CreatableSelect from 'react-select/creatable';
 import Select from 'react-select'
-import { ListValue, EditableValue, ActionValue, ListAttributeValue } from "mendix";
+import { ListValue, EditableValue, ActionValue, ListAttributeValue, ValueStatus } from "mendix";
 import { Styles } from 'react-select/src/styles';
 import { OptionTypeBase } from "react-select/src/types";
 
 const animatedComponents = makeAnimated();
 
 export interface Option {
-    label: string;
-    value: string;
-}
-
-export interface Label {
     label: string;
     value: string;
 }
@@ -35,7 +30,6 @@ export interface TagSelectComponentProps {
     classNamePrefix?: string;
     selectTag?: ActionValue;
     createTag?: ActionValue;
-    toLowercase: boolean;
     removeTag?: ActionValue;
     removeAllTags?: ActionValue;
     tagLabel: EditableValue<string>;
@@ -49,42 +43,38 @@ export interface TagSelectComponentProps {
 }
 
 export default function TagSelector(props: TagSelectComponentProps): ReactElement {
-    const [isLoading, setIsLoading] = useState(false);
-    const [options, setOptions] = useState<Option[]>([]);
-    const [labels, setLabels] = useState<Label[]>([]);
-
-    const createOption = (label: string) => ({
-        label: props.toLowercase ? label.toLowerCase() : label,
-        value: props.toLowercase ? label.toLowerCase().replace(/\W/g, '') : label.replace(/\W/g, ''),
+    const createOption = (label: string): Option => ({
+        label: label,
+        value: label.replace(/\W/g, ''),
     });
-    useEffect(() => {
-        if (props.currentTags.status === 'available') {
-            const currentTags = props.currentTags.items.map(obj =>
-                createOption(props.currentTagLabel(obj).displayValue));
-            setLabels(currentTags);
-        }
-    }, [props.currentTags]);
 
-    useEffect(() => {
-        if (props.tagSuggestions.status === 'available') {
-            const tagSuggestions = props.tagSuggestions.items.map(obj =>
-                createOption(props.tagSuggestionsLabel(obj).displayValue));
-            setOptions(tagSuggestions);
-        }
-    }, [props.tagSuggestions]);
+    let labels: Option[];
+    let tagSuggestions: Option[];
+
+    if (props.currentTags.status === ValueStatus.Available) {
+        labels = props.currentTags.items.map(obj =>
+            createOption(props.currentTagLabel(obj).displayValue));
+    }
+
+    if (props.tagSuggestions.status === ValueStatus.Available) {
+        tagSuggestions = props.tagSuggestions.items.map(obj =>
+            createOption(props.tagSuggestionsLabel(obj).displayValue));
+    }
+
 
     const handleChange = async (inputValue: any, actionMeta: any) => {
         switch (actionMeta.action) {
             case Actions.Select: {
-                selectAction(inputValue);
+                selectAction(actionMeta);
                 break;
             }
             case Actions.Create: {
-                createAction(inputValue);
+                createAction(actionMeta);
                 break;
             }
-            case Actions.Remove || Actions.Pop: {
-                removeAction(actionMeta, inputValue);
+            case Actions.Remove:
+            case Actions.Pop: {
+                removeAction(actionMeta);
                 break;
             }
             case Actions.Clear: {
@@ -122,11 +112,16 @@ export default function TagSelector(props: TagSelectComponentProps): ReactElemen
             valueContainer: () => ({}),
         };
     }
+
+    const isLoading =
+        props.tagSuggestions.status === ValueStatus.Loading ||
+        (props.currentTags && props.currentTags.status === ValueStatus.Loading);
+
     if (props.enableCreate) {
         return (
             <CreatableSelect
                 isMulti
-                options={options}
+                options={tagSuggestions}
                 value={labels}
                 onChange={handleChange}
                 isLoading={isLoading}
@@ -143,7 +138,7 @@ export default function TagSelector(props: TagSelectComponentProps): ReactElemen
         return (
             <Select
                 isMulti
-                options={options}
+                options={tagSuggestions}
                 value={labels}
                 onChange={handleChange}
                 isLoading={isLoading}
@@ -159,69 +154,35 @@ export default function TagSelector(props: TagSelectComponentProps): ReactElemen
 
 
     function clearAction() {
-        setIsLoading(true);
-        try {
-            if (props.removeAllTags.canExecute) {
-                props.removeAllTags.execute();
-            }
-            setLabels([]);
-        } catch (err) {
-            console.error('Failed to remove all Tags: ' + err);
+        if (props.removeAllTags.canExecute) {
+            props.removeAllTags.execute();
         }
-        setIsLoading(false);
     }
 
-    function removeAction(actionMeta: any, inputValue: any) {
-        setIsLoading(true);
-        try {
-            if (props.tagLabel.status === 'available') {
-                props.tagLabel.setValue(actionMeta.removedValue.label);
-            }
-            if (props.removeTag.canExecute) {
-                props.removeTag.execute();
-            }
-            setLabels(inputValue);
-        } catch (err) {
-            console.error('Failed to remove a Tag: ' + err);
+    function removeAction(actionMeta: any) {
+        if (props.tagLabel.status === ValueStatus.Available) {
+            props.tagLabel.setValue(actionMeta.removedValue.label);
         }
-        setIsLoading(false);
+        if (props.removeTag.canExecute) {
+            props.removeTag.execute();
+        }
     }
 
-    function createAction(inputValue: any) {
-        setIsLoading(true);
-        inputValue[inputValue.length - 1].label = props.toLowercase ?
-            inputValue[inputValue.length - 1].label.toLowerCase() :
-            inputValue[inputValue.length - 1].label;
-        try {
-            if (props.tagLabel.status === 'available') {
-                props.tagLabel.setValue(inputValue[inputValue.length - 1].label);
-            }
-            if (props.createTag.canExecute) {
-                props.createTag.execute();
-            }
-            setLabels(inputValue);
-        } catch (err) {
-            console.error('Failed to create a Tag: ' + err);
+    function createAction(actionMeta: any) {
+        if (props.tagLabel.status === ValueStatus.Available) {
+            props.tagLabel.setValue(actionMeta.option.label);
         }
-        setIsLoading(false);
+        if (props.createTag.canExecute) {
+            props.createTag.execute();
+        }
     }
 
-    function selectAction(inputValue: any) {
-        setIsLoading(true);
-        inputValue[inputValue.length - 1].label = props.toLowercase ?
-            inputValue[inputValue.length - 1].label.toLowerCase() :
-            inputValue[inputValue.length - 1].label;
-        try {
-            if (props.tagLabel.status === 'available') {
-                props.tagLabel.setValue(inputValue[inputValue.length - 1].label);
-            }
-            if (props.selectTag.canExecute) {
-                props.selectTag.execute();
-            }
-            setLabels(inputValue);
-        } catch (err) {
-            console.error('Failed to select a Tag: ' + err);
+    function selectAction(actionMeta: any) {
+        if (props.tagLabel.status === ValueStatus.Available) {
+            props.tagLabel.setValue(actionMeta.option.label);
         }
-        setIsLoading(false);
+        if (props.selectTag.canExecute) {
+            props.selectTag.execute();
+        }
     }
 }

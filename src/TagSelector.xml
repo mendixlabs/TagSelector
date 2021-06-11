@@ -23,10 +23,6 @@
                 <caption>Create tag microflow</caption>
                 <description>Microflow to be executed a new tag is added.</description>
             </property>
-            <property key="toLowercase" type="boolean" defaultValue="true">
-                <caption>Convert to lowercase</caption>
-                <description>Convert the created tags to lowercase in the tag selector</description>
-            </property>
             <property key="removeTag" type="action" >
                 <caption>Remove tag microflow</caption>
                 <description>Microflow to be executed when a tag is deleted.</description>
@@ -80,7 +76,7 @@
                 <caption>ClassNamePrefix</caption>
                 <description>Custom Class name prefix.</description>
             </property>
-            <property key="animatedDelete" type="boolean" defaultValue="true">
+            <property key="animatedDelete" type="boolean" defaultValue="false">
                 <caption>Animated Delete</caption>
                 <description>Animation while deleting a tag.</description>
             </property>

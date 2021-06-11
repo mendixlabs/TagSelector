@@ -33,6 +33,20 @@ public class Microflows
 		Map<java.lang.String, Object> params = new HashMap<>();
 		Core.microflowCall("MyFirstModule.urlencode").withParams(params).execute(context);
 	}
+	public static java.util.List<myfirstmodule.proxies.Tag> widget_GetAllTagSuggestions(IContext context, myfirstmodule.proxies.Entity _entity)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("Entity", _entity == null ? null : _entity.getMendixObject());
+		java.util.List<IMendixObject> objs = Core.microflowCall("MyFirstModule.Widget_GetAllTagSuggestions").withParams(params).execute(context);
+		java.util.List<myfirstmodule.proxies.Tag> result = null;
+		if (objs != null)
+		{
+			result = new java.util.ArrayList<>();
+			for (IMendixObject obj : objs)
+				result.add(myfirstmodule.proxies.Tag.initialize(context, obj));
+		}
+		return result;
+	}
 	public static java.util.List<myfirstmodule.proxies.Tag> widget_GetCurrentTags(IContext context, myfirstmodule.proxies.Entity _entity)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
