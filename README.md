@@ -16,10 +16,11 @@ Having a look at the test project can be a great help to understand how the widg
 2. Before placing the widget on a page you should add a dataview containing this helper object for the widget.
 3. Place the widget inside this dataview.
 4. Specifiy the string attribute of the helper object in the TagNPE Label field.
-5. Specify microflows that handle the selection, creation and removal of tags.
-6. Specify the datasources for the retrieval of the current and optional tags. Also specify their label attributes.
-7. Specify if you want to allow for the creation of tags by the widget, if set to false the Create tag microflow will be disregarded.
-8. Optionally set several styling options in the styling tab.
+6. Specify **microflows** as datasources for the retrieval of the current and optional tags. Also specify their label attributes.
+7. **Make sure to add the entity to which the tags are associated as a parameter to the datasource microflow (even if it is not being used in the microflow). Else the flow won't be retriggered when something changes to the entity and the widget won't update.**
+8. Specify microflows that handle the selection, creation and removal of tags. **Make sure to refresh the entity in client to which the tags are associated, else the widget won't update.**
+9. Specify if you want to allow for the creation of tags by the widget, if set to false the Create tag microflow will be disregarded.
+10. Optionally set several styling options in the styling tab.
 
 ## Test project
 A test project is stored at /tests/testProject.
