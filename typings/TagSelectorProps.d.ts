@@ -23,6 +23,7 @@ export interface TagSelectorContainerProps {
     enableCreate: boolean;
     useDefaultStyle: boolean;
     placeholder: string;
+    customCreatePrefix: string;
     className: string;
     classNamePrefix: string;
     animatedDelete: boolean;
@@ -43,6 +44,7 @@ export interface TagSelectorPreviewProps {
     enableCreate: boolean;
     useDefaultStyle: boolean;
     placeholder: string;
+    customCreatePrefix: string;
     className: string;
     classNamePrefix: string;
     animatedDelete: boolean;
