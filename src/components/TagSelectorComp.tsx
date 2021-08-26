@@ -56,12 +56,12 @@ export default function TagSelector(props: TagSelectComponentProps): ReactElemen
 
     if (props.currentTags.status === ValueStatus.Available) {
         labels = props.currentTags.items.map(obj =>
-            createOption(props.currentTagLabel(obj).displayValue));
+            createOption(props.currentTagLabel.get(obj).displayValue));
     }
 
     if (props.tagSuggestions.status === ValueStatus.Available) {
         tagSuggestions = props.tagSuggestions.items.map(obj =>
-            createOption(props.tagSuggestionsLabel(obj).displayValue));
+            createOption(props.tagSuggestionsLabel.get(obj).displayValue));
     }
 
 
