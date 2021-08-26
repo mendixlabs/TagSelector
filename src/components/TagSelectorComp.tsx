@@ -1,4 +1,5 @@
 import { createElement, ReactElement } from "react";
+import React from "react";
 
 import "../ui/TagSelector.css";
 
@@ -41,6 +42,7 @@ export interface TagSelectComponentProps {
     enableCreate: boolean;
     animatedDelete: boolean;
     disabled: boolean;
+    customCreatePrefix?: string;
 }
 
 export default function TagSelector(props: TagSelectComponentProps): ReactElement {
@@ -84,6 +86,10 @@ export default function TagSelector(props: TagSelectComponentProps): ReactElemen
             }
         }
     };
+
+    function customCreateNewTag (input : String){
+        return React.createElement('span', {id:'custom-create-tag-label'}, props.customCreatePrefix+ ' "' + input + '"');
+    }
 
     let styles: Styles<OptionTypeBase, true> = {};
 
@@ -133,6 +139,7 @@ export default function TagSelector(props: TagSelectComponentProps): ReactElemen
                 classNamePrefix={props.classNamePrefix}
                 tabSelectsValue={false}
                 isDisabled={props.disabled}
+                formatCreateLabel={customCreateNewTag}
             />
         );
     }

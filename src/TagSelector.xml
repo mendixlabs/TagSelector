@@ -68,6 +68,10 @@
                 <caption>Placeholder</caption>
                 <description>Placeholder text for when there are no labels.</description>
             </property>
+            <property key="customCreatePrefix" type="string" required="false" defaultValue="Create">
+                <caption>CustomCreatePrefix</caption>
+                <description>The line of text that will appear in the dropdown menu when creating a new tag.</description>
+            </property>
             <property key="className" type="string" required="false">
                 <caption>ClassName</caption>
                 <description>Custom class name.</description>

@@ -23,5 +23,6 @@ export default function TagSelector(props: TagSelectorContainerProps): ReactElem
                     enableCreate={props.enableCreate}
                     animatedDelete={props.animatedDelete}
                     disabled={props.tagLabel.readOnly}
+                    customCreatePrefix={props.customCreatePrefix}
                 />;
 }
