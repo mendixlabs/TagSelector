@@ -1,7 +1,7 @@
 {
   "name": "tagselector",
   "widgetName": "TagSelector",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Pluggable Mendix widget to select/delete/create objects and assign them to an existing object.",
   "copyright": "2020 Mendix Technology BV",
   "author": "Nick",
@@ -25,7 +25,7 @@
   },
   "license": "Apache-2.0",
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": "^8.14.0",
+    "@mendix/pluggable-widgets-tools": "^9.4.3",
     "@types/big.js": "^4.0.5",
     "@types/classnames": "^2.2.4",
     "@types/enzyme": "^3.1.10",
