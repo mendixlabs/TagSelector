@@ -55,13 +55,18 @@ export default function TagSelector(props: TagSelectComponentProps): ReactElemen
     let tagSuggestions: Option[];
 
     if (props.currentTags.status === ValueStatus.Available) {
-        labels = props.currentTags.items.map(obj =>
-            createOption(props.currentTagLabel.get(obj).displayValue));
+        labels = props.currentTags.items.map(obj => {
+            //Accessing an attribute from the list item directly is deprecated since mx9, but the get() function doesn't yet exist yet in mx8. Thats why we have this check, to have the widget work in both versions.
+            const currentTagValue = "get" in props.currentTagLabel ? props.currentTagLabel.get(obj).displayValue : props.currentTagLabel(obj).displayValue;
+            return createOption(currentTagValue);
+        });
     }
 
     if (props.tagSuggestions.status === ValueStatus.Available) {
-        tagSuggestions = props.tagSuggestions.items.map(obj =>
-            createOption(props.tagSuggestionsLabel.get(obj).displayValue));
+        tagSuggestions = props.tagSuggestions.items.map(obj =>{
+            const tagSuggestionValue = "get" in props.currentTagLabel ? props.tagSuggestionsLabel.get(obj).displayValue : props.tagSuggestionsLabel(obj).displayValue;
+            return createOption(tagSuggestionValue);
+        });
     }
 
 
@@ -87,8 +92,8 @@ export default function TagSelector(props: TagSelectComponentProps): ReactElemen
         }
     };
 
-    function customCreateNewTag (input : String){
-        return React.createElement('span', {id:'custom-create-tag-label'}, props.customCreatePrefix+ ' "' + input + '"');
+    function customCreateNewTag(input: String) {
+        return React.createElement('span', { id: 'custom-create-tag-label' }, props.customCreatePrefix + ' "' + input + '"');
     }
 
     let styles: Styles<OptionTypeBase, true> = {};
