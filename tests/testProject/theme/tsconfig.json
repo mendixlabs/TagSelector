@@ -8,7 +8,8 @@
         ],
         "types": [
             "react-native",
-            "react-native-device-info"
+            "react-native-device-info",
+            "mendix-client"
         ],
         "paths": {
             "react-native": [
@@ -43,6 +44,7 @@
         "newLine": "CRLF"
     },
     "include": [
-        "./styles/native/**/*.ts"
+        "./styles/native/**/*.ts",
+        "src/**/*"
     ]
 }

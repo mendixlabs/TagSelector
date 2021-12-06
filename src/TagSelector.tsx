@@ -8,6 +8,9 @@ import "./ui/TagSelector.css";
 export default function TagSelector(props: TagSelectorContainerProps): ReactElement{
         return  <TagSelect
                     placeholder={props.placeholder}
+                    datasourceMicroflow={props.datasourceMicroflow}
+                    guid={props.guid}
+                    inputValue={props.inputValue}
                     className={props.className}
                     classNamePrefix={props.classNamePrefix}
                     tagLabel={props.tagLabel}

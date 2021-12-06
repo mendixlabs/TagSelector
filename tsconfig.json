@@ -4,6 +4,7 @@
   "compilerOptions": {
     "noUnusedLocals": false,
     "noUnusedParameters": false,
+    "types": ["jest", "node", "mendix-client"],
     "strict": false
 },
 

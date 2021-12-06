@@ -6,7 +6,7 @@
   "copyright": "2020 Mendix Technology BV",
   "author": "Nick",
   "config": {
-    "projectPath": "./tests/testProject/",
+    "projectPath": "../Portfolio Management-CEN-894-widgets-changes-sangam",
     "mendixHost": "http://localhost:8080",
     "developmentPort": "3000"
   },
@@ -25,18 +25,21 @@
   },
   "license": "Apache-2.0",
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": "^9.4.3",
+    "@mendix/pluggable-widgets-tools": "^9.7.1",
     "@types/big.js": "^4.0.5",
     "@types/classnames": "^2.2.4",
     "@types/enzyme": "^3.1.10",
     "@types/enzyme-adapter-react-16": "^1.0.2",
     "@types/jest": "^24.0.0",
-    "@types/react": "~16.9.0",
     "@types/react-dom": "~16.9.0",
     "@types/react-select": "^4.0.7",
-    "@types/react-test-renderer": "~16.9.0"
+    "mendix-client": "^7.15.8",
+    "@types/react-test-renderer": "~16.9.0",
+    "debounce-promise": "3.1.0"
+
   },
   "dependencies": {
+    "mendix": "^8.18.30655",
     "react-select": "^4.3.1"
   }
 }

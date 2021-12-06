@@ -13,6 +13,9 @@ export interface TagSelectorContainerProps {
     tabIndex?: number;
     id: string;
     tagLabel: EditableValue<string>;
+    guid: EditableValue<string>;
+    datasourceMicroflow: EditableValue<string>;
+    inputValue: EditableValue<string>;
     selectTag?: ActionValue;
     createTag?: ActionValue;
     removeTag?: ActionValue;
@@ -22,6 +25,7 @@ export interface TagSelectorContainerProps {
     tagSuggestions: ListValue;
     tagSuggestionsLabel: ListAttributeValue<string>;
     enableCreate: boolean;
+    onChangeAction?: ActionValue;
     useDefaultStyle: boolean;
     placeholder: string;
     customCreatePrefix: string;
@@ -34,6 +38,9 @@ export interface TagSelectorPreviewProps {
     class: string;
     style: string;
     tagLabel: string;
+    guid: string;
+    datasourceMicroflow: string;
+    inputValue: string;
     selectTag: {} | null;
     createTag: {} | null;
     removeTag: {} | null;
@@ -43,6 +50,7 @@ export interface TagSelectorPreviewProps {
     tagSuggestions: {} | { type: string } | null;
     tagSuggestionsLabel: string;
     enableCreate: boolean;
+    onChangeAction: {} | null;
     useDefaultStyle: boolean;
     placeholder: string;
     customCreatePrefix: string;

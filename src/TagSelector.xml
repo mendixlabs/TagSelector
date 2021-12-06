@@ -8,9 +8,31 @@
     <properties>
         <propertyGroup caption="Data source">
             <systemProperty key="Label"/>
-            <property key="tagLabel" type="attribute">
+            <property key="tagLabel" type="attribute" onChange="onChangeAction">
                 <caption>TagNPE Label</caption>
                 <description>Label attribute of the TagNPE.</description>
+                <attributeTypes>
+                    <attributeType name="String"/>
+                </attributeTypes>
+            </property>
+            <property key="guid" type="attribute">
+                <caption>guid</caption>
+                <description>guid of the context object.</description>
+                <attributeTypes>
+                    <attributeType name="String"/>
+                </attributeTypes>
+            </property>
+            <property key="datasourceMicroflow" type="attribute">
+                <caption>microflow</caption>
+                <description>microflow to execute</description>
+                <attributeTypes>
+                    <attributeType name="String"/>
+                </attributeTypes>
+            </property>
+            
+            <property key="inputValue" type="attribute" onChange="onChangeAction">
+                <caption>inputValue</caption>
+                <description>input value when user types.</description>
                 <attributeTypes>
                     <attributeType name="String"/>
                 </attributeTypes>
@@ -56,6 +78,13 @@
             <property key="enableCreate" type="boolean" defaultValue="true">
                 <caption>Enable Create</caption>
                 <description>Enable the Tag Selector to create tags when none are found.</description>
+            </property>
+        </propertyGroup>
+
+        <propertyGroup caption="Events">
+            <property key="onChangeAction" type="action" required="false">
+                 <caption>On change</caption>
+                <description>on change microflow to trigger when the input is changed</description>
             </property>
         </propertyGroup>
 
