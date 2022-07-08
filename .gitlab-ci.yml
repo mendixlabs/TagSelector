@@ -11,4 +11,3 @@ snyk:
   script:
     - snyk test --severity-threshold=medium --severity-threshold=high
     - snyk monitor
-
