@@ -1,4 +1,4 @@
-import { createElement, ReactElement } from "react";
+import { createElement, ReactElement, useState } from "react";
 import React from "react";
 
 import "../ui/TagSelector.css";
@@ -24,7 +24,9 @@ enum Actions {
     Remove = "remove-value",
     Pop = "pop-value"
 }
-
+interface State {
+    readonly menuIsOpen?: boolean;
+  }
 export interface TagSelectComponentProps {
     placeholder?: string;
     className?: string;
@@ -46,9 +48,12 @@ export interface TagSelectComponentProps {
 }
 
 export default function TagSelector(props: TagSelectComponentProps): ReactElement {
+    const [value, setValue] = useState<any | null>(null)
+    const [inputValue, setInputValue] = useState<any | null>(null);
+
     const createOption = (label: string): Option => ({
-        label: label,
-        value: label.replace(/\W/g, ''),
+        label: label ,
+        value: label !== null ? label.replace(/\W/g, '') : null,
     });
 
     let labels: Option[];
@@ -69,24 +74,54 @@ export default function TagSelector(props: TagSelectComponentProps): ReactElemen
         });
     }
 
+    const onInputChange = async (textInput,  actionMeta: any ) => {
+        console.log("on input change triggered...",actionMeta.action)
+        if (actionMeta.action === "input-change") {
+          if (textInput && (textInput.endsWith(",") || textInput.endsWith(" "))){
+            const label = textInput.slice(0, -1); // trim off comma
+            if(label){
+                const newValue = { label, value: label };
+                console.log("comma separator",actionMeta.action)
+ 
+                if (props.tagLabel.status === ValueStatus.Available) {
+                props.tagLabel.setValue(label);
+                }
+                if (props.createTag.canExecute) {
+                props.createTag.execute();
+                }
+            }
+            console.log('creat action...',actionMeta,inputValue)
+            setInputValue("");
+          } 
+          else {
+            setInputValue(textInput);
+          }
+        }
+      };
 
     const handleChange = async (inputValue: any, actionMeta: any) => {
+        console.log('handle change triggered ......')
+        setInputValue(""); setInputValue("");
         switch (actionMeta.action) {
             case Actions.Select: {
                 selectAction(actionMeta);
+                console.log('select action...',actionMeta,inputValue)
                 break;
             }
             case Actions.Create: {
                 createAction(actionMeta);
+                console.log('creat action...',actionMeta,inputValue)
                 break;
             }
             case Actions.Remove:
             case Actions.Pop: {
                 removeAction(actionMeta);
+                console.log('remove/pop action...',actionMeta,inputValue)
                 break;
             }
             case Actions.Clear: {
                 clearAction();
+                console.log('clear action...',actionMeta,inputValue)
                 break;
             }
         }
@@ -130,12 +165,15 @@ export default function TagSelector(props: TagSelectComponentProps): ReactElemen
         (props.currentTags && props.currentTags.status === ValueStatus.Loading);
 
     if (props.enableCreate) {
+        console.log('banani is  trying 1234567891234567891234... ')
         return (
             <CreatableSelect
                 isMulti
                 options={tagSuggestions}
                 value={labels}
+                onInputChange={onInputChange}
                 onChange={handleChange}
+                inputValue={inputValue}
                 isLoading={isLoading}
                 components={props.animatedDelete ? animatedComponents : undefined}
                 styles={styles}
@@ -149,11 +187,13 @@ export default function TagSelector(props: TagSelectComponentProps): ReactElemen
         );
     }
     else {
+        console.log('banani is trying ')
         return (
             <Select
                 isMulti
                 options={tagSuggestions}
                 value={labels}
+                onInputChange={onInputChange}
                 onChange={handleChange}
                 isLoading={isLoading}
                 components={props.animatedDelete ? animatedComponents : undefined}

@@ -22,10 +22,9 @@ public class WorkflowDefinition
 	{
 		Name("Name"),
 		Title("Title"),
-		IsObsolete("IsObsolete"),
-		WorkflowDefinition_CurrentWorkflowVersion("System.WorkflowDefinition_CurrentWorkflowVersion");
+		IsObsolete("IsObsolete");
 
-		private java.lang.String metaName;
+		private final java.lang.String metaName;
 
 		MemberNames(java.lang.String s)
 		{
@@ -41,15 +40,17 @@ public class WorkflowDefinition
 
 	public WorkflowDefinition(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		this(context, com.mendix.core.Core.instantiate(context, "System.WorkflowDefinition"));
+		this(context, com.mendix.core.Core.instantiate(context, entityName));
 	}
 
 	protected WorkflowDefinition(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject workflowDefinitionMendixObject)
 	{
-		if (workflowDefinitionMendixObject == null)
+		if (workflowDefinitionMendixObject == null) {
 			throw new java.lang.IllegalArgumentException("The given object cannot be null.");
-		if (!com.mendix.core.Core.isSubClassOf("System.WorkflowDefinition", workflowDefinitionMendixObject.getType()))
-			throw new java.lang.IllegalArgumentException("The given object is not a System.WorkflowDefinition");
+		}
+		if (!com.mendix.core.Core.isSubClassOf(entityName, workflowDefinitionMendixObject.getType())) {
+			throw new java.lang.IllegalArgumentException(String.format("The given object is not a %s", entityName));
+		}	
 
 		this.workflowDefinitionMendixObject = workflowDefinitionMendixObject;
 		this.context = context;
@@ -67,6 +68,9 @@ public class WorkflowDefinition
 	/**
 	 * Initialize a proxy using context (recommended). This context will be used for security checking when the get- and set-methods without context parameters are called.
 	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.createSudoClone() can be used to obtain sudo access).
+	 * @param context The context to be used
+	 * @param mendixObject The Mendix object for the new instance
+	 * @return a new instance of this proxy class
 	 */
 	public static system.proxies.WorkflowDefinition initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
 	{
@@ -81,14 +85,16 @@ public class WorkflowDefinition
 
 	public static java.util.List<system.proxies.WorkflowDefinition> load(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String xpathConstraint) throws com.mendix.core.CoreException
 	{
-		java.util.List<system.proxies.WorkflowDefinition> result = new java.util.ArrayList<system.proxies.WorkflowDefinition>();
-		for (com.mendix.systemwideinterfaces.core.IMendixObject obj : com.mendix.core.Core.retrieveXPathQuery(context, "//System.WorkflowDefinition" + xpathConstraint))
-			result.add(system.proxies.WorkflowDefinition.initialize(context, obj));
-		return result;
+		return com.mendix.core.Core.createXPathQuery(String.format("//%1$s%2$s", entityName, xpathConstraint))
+			.execute(context)
+			.stream()
+			.map(obj -> system.proxies.WorkflowDefinition.initialize(context, obj))
+			.collect(java.util.stream.Collectors.toList());
 	}
 
 	/**
 	 * Commit the changes made on this proxy object.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit() throws com.mendix.core.CoreException
 	{
@@ -97,6 +103,7 @@ public class WorkflowDefinition
 
 	/**
 	 * Commit the changes made on this proxy object using the specified context.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
@@ -227,49 +234,6 @@ public class WorkflowDefinition
 	}
 
 	/**
-	 * @return value of WorkflowDefinition_CurrentWorkflowVersion
-	 */
-	public final system.proxies.WorkflowVersion getWorkflowDefinition_CurrentWorkflowVersion() throws com.mendix.core.CoreException
-	{
-		return getWorkflowDefinition_CurrentWorkflowVersion(getContext());
-	}
-
-	/**
-	 * @param context
-	 * @return value of WorkflowDefinition_CurrentWorkflowVersion
-	 */
-	public final system.proxies.WorkflowVersion getWorkflowDefinition_CurrentWorkflowVersion(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
-	{
-		system.proxies.WorkflowVersion result = null;
-		com.mendix.systemwideinterfaces.core.IMendixIdentifier identifier = getMendixObject().getValue(context, MemberNames.WorkflowDefinition_CurrentWorkflowVersion.toString());
-		if (identifier != null)
-			result = system.proxies.WorkflowVersion.load(context, identifier);
-		return result;
-	}
-
-	/**
-	 * Set value of WorkflowDefinition_CurrentWorkflowVersion
-	 * @param workflowdefinition_currentworkflowversion
-	 */
-	public final void setWorkflowDefinition_CurrentWorkflowVersion(system.proxies.WorkflowVersion workflowdefinition_currentworkflowversion)
-	{
-		setWorkflowDefinition_CurrentWorkflowVersion(getContext(), workflowdefinition_currentworkflowversion);
-	}
-
-	/**
-	 * Set value of WorkflowDefinition_CurrentWorkflowVersion
-	 * @param context
-	 * @param workflowdefinition_currentworkflowversion
-	 */
-	public final void setWorkflowDefinition_CurrentWorkflowVersion(com.mendix.systemwideinterfaces.core.IContext context, system.proxies.WorkflowVersion workflowdefinition_currentworkflowversion)
-	{
-		if (workflowdefinition_currentworkflowversion == null)
-			getMendixObject().setValue(context, MemberNames.WorkflowDefinition_CurrentWorkflowVersion.toString(), null);
-		else
-			getMendixObject().setValue(context, MemberNames.WorkflowDefinition_CurrentWorkflowVersion.toString(), workflowdefinition_currentworkflowversion.getMendixObject().getId());
-	}
-
-	/**
 	 * @return the IMendixObject instance of this proxy for use in the Core interface.
 	 */
 	public final com.mendix.systemwideinterfaces.core.IMendixObject getMendixObject()
@@ -288,9 +252,9 @@ public class WorkflowDefinition
 	@java.lang.Override
 	public boolean equals(Object obj)
 	{
-		if (obj == this)
+		if (obj == this) {
 			return true;
-
+		}
 		if (obj != null && getClass().equals(obj.getClass()))
 		{
 			final system.proxies.WorkflowDefinition that = (system.proxies.WorkflowDefinition) obj;
@@ -310,7 +274,7 @@ public class WorkflowDefinition
 	 */
 	public static java.lang.String getType()
 	{
-		return "System.WorkflowDefinition";
+		return entityName;
 	}
 
 	/**

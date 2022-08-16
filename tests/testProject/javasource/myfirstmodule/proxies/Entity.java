@@ -23,7 +23,7 @@ public class Entity
 		Name("Name"),
 		Entity_Tag("MyFirstModule.Entity_Tag");
 
-		private java.lang.String metaName;
+		private final java.lang.String metaName;
 
 		MemberNames(java.lang.String s)
 		{
@@ -39,15 +39,17 @@ public class Entity
 
 	public Entity(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		this(context, com.mendix.core.Core.instantiate(context, "MyFirstModule.Entity"));
+		this(context, com.mendix.core.Core.instantiate(context, entityName));
 	}
 
 	protected Entity(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject entityMendixObject)
 	{
-		if (entityMendixObject == null)
+		if (entityMendixObject == null) {
 			throw new java.lang.IllegalArgumentException("The given object cannot be null.");
-		if (!com.mendix.core.Core.isSubClassOf("MyFirstModule.Entity", entityMendixObject.getType()))
-			throw new java.lang.IllegalArgumentException("The given object is not a MyFirstModule.Entity");
+		}
+		if (!com.mendix.core.Core.isSubClassOf(entityName, entityMendixObject.getType())) {
+			throw new java.lang.IllegalArgumentException(String.format("The given object is not a %s", entityName));
+		}	
 
 		this.entityMendixObject = entityMendixObject;
 		this.context = context;
@@ -65,6 +67,9 @@ public class Entity
 	/**
 	 * Initialize a proxy using context (recommended). This context will be used for security checking when the get- and set-methods without context parameters are called.
 	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.createSudoClone() can be used to obtain sudo access).
+	 * @param context The context to be used
+	 * @param mendixObject The Mendix object for the new instance
+	 * @return a new instance of this proxy class
 	 */
 	public static myfirstmodule.proxies.Entity initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
 	{
@@ -79,14 +84,16 @@ public class Entity
 
 	public static java.util.List<myfirstmodule.proxies.Entity> load(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String xpathConstraint) throws com.mendix.core.CoreException
 	{
-		java.util.List<myfirstmodule.proxies.Entity> result = new java.util.ArrayList<myfirstmodule.proxies.Entity>();
-		for (com.mendix.systemwideinterfaces.core.IMendixObject obj : com.mendix.core.Core.retrieveXPathQuery(context, "//MyFirstModule.Entity" + xpathConstraint))
-			result.add(myfirstmodule.proxies.Entity.initialize(context, obj));
-		return result;
+		return com.mendix.core.Core.createXPathQuery(String.format("//%1$s%2$s", entityName, xpathConstraint))
+			.execute(context)
+			.stream()
+			.map(obj -> myfirstmodule.proxies.Entity.initialize(context, obj))
+			.collect(java.util.stream.Collectors.toList());
 	}
 
 	/**
 	 * Commit the changes made on this proxy object.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit() throws com.mendix.core.CoreException
 	{
@@ -95,6 +102,7 @@ public class Entity
 
 	/**
 	 * Commit the changes made on this proxy object using the specified context.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
@@ -153,6 +161,7 @@ public class Entity
 	}
 
 	/**
+	 * @throws com.mendix.core.CoreException
 	 * @return value of Entity_Tag
 	 */
 	public final java.util.List<myfirstmodule.proxies.Tag> getEntity_Tag() throws com.mendix.core.CoreException
@@ -163,16 +172,19 @@ public class Entity
 	/**
 	 * @param context
 	 * @return value of Entity_Tag
+	 * @throws com.mendix.core.CoreException
 	 */
 	@SuppressWarnings("unchecked")
 	public final java.util.List<myfirstmodule.proxies.Tag> getEntity_Tag(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
-		java.util.List<myfirstmodule.proxies.Tag> result = new java.util.ArrayList<myfirstmodule.proxies.Tag>();
+		java.util.List<myfirstmodule.proxies.Tag> result = new java.util.ArrayList<>();
 		Object valueObject = getMendixObject().getValue(context, MemberNames.Entity_Tag.toString());
-		if (valueObject == null)
+		if (valueObject == null) {
 			return result;
-		for (com.mendix.systemwideinterfaces.core.IMendixObject mendixObject : com.mendix.core.Core.retrieveIdList(context, (java.util.List<com.mendix.systemwideinterfaces.core.IMendixIdentifier>) valueObject))
+		}
+		for (com.mendix.systemwideinterfaces.core.IMendixObject mendixObject : com.mendix.core.Core.retrieveIdList(context, (java.util.List<com.mendix.systemwideinterfaces.core.IMendixIdentifier>) valueObject)) {
 			result.add(myfirstmodule.proxies.Tag.initialize(context, mendixObject));
+		}
 		return result;
 	}
 
@@ -192,9 +204,11 @@ public class Entity
 	 */
 	public final void setEntity_Tag(com.mendix.systemwideinterfaces.core.IContext context, java.util.List<myfirstmodule.proxies.Tag> entity_tag)
 	{
-		java.util.List<com.mendix.systemwideinterfaces.core.IMendixIdentifier> identifiers = new java.util.ArrayList<com.mendix.systemwideinterfaces.core.IMendixIdentifier>();
-		for (myfirstmodule.proxies.Tag proxyObject : entity_tag)
-			identifiers.add(proxyObject.getMendixObject().getId());
+		var identifiers = entity_tag
+			.stream()
+			.map(proxyObject -> proxyObject.getMendixObject().getId())
+			.collect(java.util.stream.Collectors.toList());
+		
 		getMendixObject().setValue(context, MemberNames.Entity_Tag.toString(), identifiers);
 	}
 
@@ -217,9 +231,9 @@ public class Entity
 	@java.lang.Override
 	public boolean equals(Object obj)
 	{
-		if (obj == this)
+		if (obj == this) {
 			return true;
-
+		}
 		if (obj != null && getClass().equals(obj.getClass()))
 		{
 			final myfirstmodule.proxies.Entity that = (myfirstmodule.proxies.Entity) obj;
@@ -239,7 +253,7 @@ public class Entity
 	 */
 	public static java.lang.String getType()
 	{
-		return "MyFirstModule.Entity";
+		return entityName;
 	}
 
 	/**
