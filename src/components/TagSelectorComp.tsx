@@ -90,7 +90,6 @@ export default function TagSelector(props: TagSelectComponentProps): ReactElemen
         else {
             setInputValue(textInput);
         }
-//}
       };
 
     const handleChange = async (inputValue: any, actionMeta: any) => {
