@@ -78,12 +78,7 @@ export default function TagSelector(props: TagSelectComponentProps): ReactElemen
         if (textInput && (textInput.endsWith(",") || textInput.endsWith(" ")) && actionMeta.action === "input-change"){
             const label = textInput.slice(0, -1); // trim off comma & space
             if(label){
-                if (props.tagLabel.status === ValueStatus.Available) {
-                    props.tagLabel.setValue(label);
-                }
-                if (props.createTag.canExecute) {
-                    props.createTag.execute();
-                }
+                createAction(actionMeta,label);
             }
             setInputValue("");
         } 
@@ -99,7 +94,7 @@ export default function TagSelector(props: TagSelectComponentProps): ReactElemen
                 break;
             }
             case Actions.Create: {
-                createAction(actionMeta);
+                createAction(actionMeta,null);
                 break;
             }
             case Actions.Remove:
@@ -207,9 +202,11 @@ export default function TagSelector(props: TagSelectComponentProps): ReactElemen
         }
     }
 
-    function createAction(actionMeta: any) {
+    function createAction(actionMeta: any, labelInput) {
+        let label = actionMeta.action === "input-change" ? labelInput : actionMeta.option.label;
+
         if (props.tagLabel.status === ValueStatus.Available) {
-            props.tagLabel.setValue(actionMeta.option.label);
+            props.tagLabel.setValue(label);
         }
         if (props.createTag.canExecute) {
             props.createTag.execute();
