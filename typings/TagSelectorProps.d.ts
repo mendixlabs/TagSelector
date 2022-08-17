@@ -22,6 +22,7 @@ export interface TagSelectorContainerProps {
     tagSuggestions: ListValue;
     tagSuggestionsLabel: ListAttributeValue<string>;
     enableCreate: boolean;
+    additionalChars: boolean;
     useDefaultStyle: boolean;
     placeholder: string;
     customCreatePrefix: string;
@@ -43,6 +44,7 @@ export interface TagSelectorPreviewProps {
     tagSuggestions: {} | { type: string } | null;
     tagSuggestionsLabel: string;
     enableCreate: boolean;
+    additionalChars: boolean;
     useDefaultStyle: boolean;
     placeholder: string;
     customCreatePrefix: string;
