@@ -42,7 +42,8 @@ export interface TagSelectComponentProps {
     tagSuggestionsLabel: ListAttributeValue<string>;
     useDefaultStyle: boolean;
     enableCreate: boolean;
-    additionalChars: boolean;
+    enableSpace: boolean;
+    enableComma: boolean;
     animatedDelete: boolean;
     disabled: boolean;
     customCreatePrefix?: string;
@@ -50,10 +51,9 @@ export interface TagSelectComponentProps {
 
 export default function TagSelector(props: TagSelectComponentProps): ReactElement {
     const [inputValue, setInputValue] = useState<any | null>(null);
-
     const createOption = (label: string): Option => ({
         label: label ,
-        value: label !== null ? label.replace(/\W/g, '') : '',
+        value: label.replace(/\W/g, '') 
     });
 
     let labels: Option[];
@@ -75,17 +75,28 @@ export default function TagSelector(props: TagSelectComponentProps): ReactElemen
     }
 
     const onInputChange = async (textInput,  actionMeta: any ) => {
-        if (textInput && (textInput.endsWith(",") || textInput.endsWith(" ")) && actionMeta.action === "input-change"){
-            const label = textInput.slice(0, -1); // trim off comma & space
-            if(label){
-                createAction(actionMeta,label);
-            }
-            setInputValue("");
-        } 
-        else {
+        if (textInput && actionMeta.action === "input-change"){
+            if((props.enableComma && props.enableSpace) && (textInput.endsWith(" ") || textInput.endsWith(","))){
+                    sliceText(textInput,actionMeta)
+                }else if (props.enableComma && textInput.endsWith(",")){
+                    sliceText(textInput,actionMeta)
+                }else if(props.enableSpace && textInput.endsWith(" ")){
+                        sliceText(textInput,actionMeta)
+                }else{
+                    setInputValue(textInput);
+                }   
+        }else {
             setInputValue(textInput);
         }
       };
+    
+    function sliceText(textInput,actionMeta){
+        const label = textInput.slice(0, -1); // trim off comma & space
+        if(label){
+            createAction(actionMeta,label);
+        }
+        setInputValue("");
+    }
 
     const handleChange = async (inputValue: any, actionMeta: any) => {
         switch (actionMeta.action) {
@@ -153,8 +164,8 @@ export default function TagSelector(props: TagSelectComponentProps): ReactElemen
                 options={tagSuggestions}
                 value={labels}
                 onChange={handleChange}
-                inputValue={props.additionalChars ?(inputValue !== null ?inputValue:''): undefined}
-                onInputChange={props.additionalChars ? onInputChange : undefined}
+                inputValue={props.enableComma || props.enableSpace ?(inputValue !== null ?inputValue:''): undefined}
+                onInputChange={props.enableComma || props.enableSpace ? onInputChange : undefined}
                 isLoading={isLoading}
                 components={props.animatedDelete ? animatedComponents : undefined}
                 styles={styles}
