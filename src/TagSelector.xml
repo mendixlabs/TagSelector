@@ -53,6 +53,8 @@
                     <attributeType name="String"/>
                 </attributeTypes>
             </property>
+        </propertyGroup>
+         <propertyGroup caption="Advanced">
             <property key="enableCreate" type="boolean" defaultValue="true">
                 <caption>Enable Create</caption>
                 <description>Enable the Tag Selector to create tags when none are found.</description>
