@@ -3,13 +3,10 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
-import { CSSProperties } from "react";
 import { ActionValue, EditableValue, ListValue, ListAttributeValue } from "mendix";
 
 export interface TagSelectorContainerProps {
     name: string;
-    class: string;
-    style?: CSSProperties;
     tabIndex?: number;
     id: string;
     tagLabel: EditableValue<string>;
@@ -33,8 +30,7 @@ export interface TagSelectorContainerProps {
 }
 
 export interface TagSelectorPreviewProps {
-    class: string;
-    style: string;
+    readOnly: boolean;
     tagLabel: string;
     selectTag: {} | null;
     createTag: {} | null;
