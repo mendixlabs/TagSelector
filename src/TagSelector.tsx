@@ -21,6 +21,8 @@ export default function TagSelector(props: TagSelectorContainerProps): ReactElem
                     tagSuggestionsLabel={props.tagSuggestionsLabel}
                     useDefaultStyle={props.useDefaultStyle}
                     enableCreate={props.enableCreate}
+                    enableSpace={props.enableSpace}
+                    enableComma={props.enableComma}
                     animatedDelete={props.animatedDelete}
                     disabled={props.tagLabel.readOnly}
                     customCreatePrefix={props.customCreatePrefix}

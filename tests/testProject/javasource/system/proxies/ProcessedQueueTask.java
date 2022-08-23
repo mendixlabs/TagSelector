@@ -4,6 +4,9 @@
 
 package system.proxies;
 
+/**
+ * Represents an audit trail of the execution of a task
+ */
 public class ProcessedQueueTask
 {
 	private final com.mendix.systemwideinterfaces.core.IMendixObject processedQueueTaskMendixObject;
@@ -24,17 +27,23 @@ public class ProcessedQueueTask
 		Status("Status"),
 		QueueId("QueueId"),
 		QueueName("QueueName"),
+		ContextType("ContextType"),
+		ContextData("ContextData"),
 		MicroflowName("MicroflowName"),
 		UserActionName("UserActionName"),
 		Arguments("Arguments"),
 		XASId("XASId"),
 		ThreadId("ThreadId"),
 		Created("Created"),
+		StartAt("StartAt"),
 		Started("Started"),
+		Finished("Finished"),
+		Duration("Duration"),
 		Retried("Retried"),
-		ErrorMessage("ErrorMessage");
+		ErrorMessage("ErrorMessage"),
+		ScheduledEventName("ScheduledEventName");
 
-		private java.lang.String metaName;
+		private final java.lang.String metaName;
 
 		MemberNames(java.lang.String s)
 		{
@@ -50,15 +59,17 @@ public class ProcessedQueueTask
 
 	public ProcessedQueueTask(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		this(context, com.mendix.core.Core.instantiate(context, "System.ProcessedQueueTask"));
+		this(context, com.mendix.core.Core.instantiate(context, entityName));
 	}
 
 	protected ProcessedQueueTask(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject processedQueueTaskMendixObject)
 	{
-		if (processedQueueTaskMendixObject == null)
+		if (processedQueueTaskMendixObject == null) {
 			throw new java.lang.IllegalArgumentException("The given object cannot be null.");
-		if (!com.mendix.core.Core.isSubClassOf("System.ProcessedQueueTask", processedQueueTaskMendixObject.getType()))
-			throw new java.lang.IllegalArgumentException("The given object is not a System.ProcessedQueueTask");
+		}
+		if (!com.mendix.core.Core.isSubClassOf(entityName, processedQueueTaskMendixObject.getType())) {
+			throw new java.lang.IllegalArgumentException(String.format("The given object is not a %s", entityName));
+		}	
 
 		this.processedQueueTaskMendixObject = processedQueueTaskMendixObject;
 		this.context = context;
@@ -76,6 +87,9 @@ public class ProcessedQueueTask
 	/**
 	 * Initialize a proxy using context (recommended). This context will be used for security checking when the get- and set-methods without context parameters are called.
 	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.createSudoClone() can be used to obtain sudo access).
+	 * @param context The context to be used
+	 * @param mendixObject The Mendix object for the new instance
+	 * @return a new instance of this proxy class
 	 */
 	public static system.proxies.ProcessedQueueTask initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
 	{
@@ -90,14 +104,16 @@ public class ProcessedQueueTask
 
 	public static java.util.List<system.proxies.ProcessedQueueTask> load(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String xpathConstraint) throws com.mendix.core.CoreException
 	{
-		java.util.List<system.proxies.ProcessedQueueTask> result = new java.util.ArrayList<system.proxies.ProcessedQueueTask>();
-		for (com.mendix.systemwideinterfaces.core.IMendixObject obj : com.mendix.core.Core.retrieveXPathQuery(context, "//System.ProcessedQueueTask" + xpathConstraint))
-			result.add(system.proxies.ProcessedQueueTask.initialize(context, obj));
-		return result;
+		return com.mendix.core.Core.createXPathQuery(String.format("//%1$s%2$s", entityName, xpathConstraint))
+			.execute(context)
+			.stream()
+			.map(obj -> system.proxies.ProcessedQueueTask.initialize(context, obj))
+			.collect(java.util.stream.Collectors.toList());
 	}
 
 	/**
 	 * Commit the changes made on this proxy object.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit() throws com.mendix.core.CoreException
 	{
@@ -106,6 +122,7 @@ public class ProcessedQueueTask
 
 	/**
 	 * Commit the changes made on this proxy object using the specified context.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
@@ -179,9 +196,9 @@ public class ProcessedQueueTask
 	public final system.proxies.QueueTaskStatus getStatus(com.mendix.systemwideinterfaces.core.IContext context)
 	{
 		Object obj = getMendixObject().getValue(context, MemberNames.Status.toString());
-		if (obj == null)
+		if (obj == null) {
 			return null;
-
+		}
 		return system.proxies.QueueTaskStatus.valueOf((java.lang.String) obj);
 	}
 
@@ -201,10 +218,11 @@ public class ProcessedQueueTask
 	 */
 	public final void setStatus(com.mendix.systemwideinterfaces.core.IContext context, system.proxies.QueueTaskStatus status)
 	{
-		if (status != null)
+		if (status != null) {
 			getMendixObject().setValue(context, MemberNames.Status.toString(), status.toString());
-		else
+		} else {
 			getMendixObject().setValue(context, MemberNames.Status.toString(), null);
+		}
 	}
 
 	/**
@@ -277,6 +295,87 @@ public class ProcessedQueueTask
 	public final void setQueueName(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String queuename)
 	{
 		getMendixObject().setValue(context, MemberNames.QueueName.toString(), queuename);
+	}
+
+	/**
+	 * Set value of ContextType
+	 * @param contexttype
+	 */
+	public final system.proxies.ContextType getContextType()
+	{
+		return getContextType(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of ContextType
+	 */
+	public final system.proxies.ContextType getContextType(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		Object obj = getMendixObject().getValue(context, MemberNames.ContextType.toString());
+		if (obj == null) {
+			return null;
+		}
+		return system.proxies.ContextType.valueOf((java.lang.String) obj);
+	}
+
+	/**
+	 * Set value of ContextType
+	 * @param contexttype
+	 */
+	public final void setContextType(system.proxies.ContextType contexttype)
+	{
+		setContextType(getContext(), contexttype);
+	}
+
+	/**
+	 * Set value of ContextType
+	 * @param context
+	 * @param contexttype
+	 */
+	public final void setContextType(com.mendix.systemwideinterfaces.core.IContext context, system.proxies.ContextType contexttype)
+	{
+		if (contexttype != null) {
+			getMendixObject().setValue(context, MemberNames.ContextType.toString(), contexttype.toString());
+		} else {
+			getMendixObject().setValue(context, MemberNames.ContextType.toString(), null);
+		}
+	}
+
+	/**
+	 * @return value of ContextData
+	 */
+	public final java.lang.String getContextData()
+	{
+		return getContextData(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of ContextData
+	 */
+	public final java.lang.String getContextData(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.ContextData.toString());
+	}
+
+	/**
+	 * Set value of ContextData
+	 * @param contextdata
+	 */
+	public final void setContextData(java.lang.String contextdata)
+	{
+		setContextData(getContext(), contextdata);
+	}
+
+	/**
+	 * Set value of ContextData
+	 * @param context
+	 * @param contextdata
+	 */
+	public final void setContextData(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String contextdata)
+	{
+		getMendixObject().setValue(context, MemberNames.ContextData.toString(), contextdata);
 	}
 
 	/**
@@ -496,6 +595,42 @@ public class ProcessedQueueTask
 	}
 
 	/**
+	 * @return value of StartAt
+	 */
+	public final java.util.Date getStartAt()
+	{
+		return getStartAt(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of StartAt
+	 */
+	public final java.util.Date getStartAt(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		return (java.util.Date) getMendixObject().getValue(context, MemberNames.StartAt.toString());
+	}
+
+	/**
+	 * Set value of StartAt
+	 * @param startat
+	 */
+	public final void setStartAt(java.util.Date startat)
+	{
+		setStartAt(getContext(), startat);
+	}
+
+	/**
+	 * Set value of StartAt
+	 * @param context
+	 * @param startat
+	 */
+	public final void setStartAt(com.mendix.systemwideinterfaces.core.IContext context, java.util.Date startat)
+	{
+		getMendixObject().setValue(context, MemberNames.StartAt.toString(), startat);
+	}
+
+	/**
 	 * @return value of Started
 	 */
 	public final java.util.Date getStarted()
@@ -529,6 +664,78 @@ public class ProcessedQueueTask
 	public final void setStarted(com.mendix.systemwideinterfaces.core.IContext context, java.util.Date started)
 	{
 		getMendixObject().setValue(context, MemberNames.Started.toString(), started);
+	}
+
+	/**
+	 * @return value of Finished
+	 */
+	public final java.util.Date getFinished()
+	{
+		return getFinished(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of Finished
+	 */
+	public final java.util.Date getFinished(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		return (java.util.Date) getMendixObject().getValue(context, MemberNames.Finished.toString());
+	}
+
+	/**
+	 * Set value of Finished
+	 * @param finished
+	 */
+	public final void setFinished(java.util.Date finished)
+	{
+		setFinished(getContext(), finished);
+	}
+
+	/**
+	 * Set value of Finished
+	 * @param context
+	 * @param finished
+	 */
+	public final void setFinished(com.mendix.systemwideinterfaces.core.IContext context, java.util.Date finished)
+	{
+		getMendixObject().setValue(context, MemberNames.Finished.toString(), finished);
+	}
+
+	/**
+	 * @return value of Duration
+	 */
+	public final java.lang.Long getDuration()
+	{
+		return getDuration(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of Duration
+	 */
+	public final java.lang.Long getDuration(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		return (java.lang.Long) getMendixObject().getValue(context, MemberNames.Duration.toString());
+	}
+
+	/**
+	 * Set value of Duration
+	 * @param duration
+	 */
+	public final void setDuration(java.lang.Long duration)
+	{
+		setDuration(getContext(), duration);
+	}
+
+	/**
+	 * Set value of Duration
+	 * @param context
+	 * @param duration
+	 */
+	public final void setDuration(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Long duration)
+	{
+		getMendixObject().setValue(context, MemberNames.Duration.toString(), duration);
 	}
 
 	/**
@@ -604,6 +811,42 @@ public class ProcessedQueueTask
 	}
 
 	/**
+	 * @return value of ScheduledEventName
+	 */
+	public final java.lang.String getScheduledEventName()
+	{
+		return getScheduledEventName(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of ScheduledEventName
+	 */
+	public final java.lang.String getScheduledEventName(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.ScheduledEventName.toString());
+	}
+
+	/**
+	 * Set value of ScheduledEventName
+	 * @param scheduledeventname
+	 */
+	public final void setScheduledEventName(java.lang.String scheduledeventname)
+	{
+		setScheduledEventName(getContext(), scheduledeventname);
+	}
+
+	/**
+	 * Set value of ScheduledEventName
+	 * @param context
+	 * @param scheduledeventname
+	 */
+	public final void setScheduledEventName(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String scheduledeventname)
+	{
+		getMendixObject().setValue(context, MemberNames.ScheduledEventName.toString(), scheduledeventname);
+	}
+
+	/**
 	 * @return the IMendixObject instance of this proxy for use in the Core interface.
 	 */
 	public final com.mendix.systemwideinterfaces.core.IMendixObject getMendixObject()
@@ -622,9 +865,9 @@ public class ProcessedQueueTask
 	@java.lang.Override
 	public boolean equals(Object obj)
 	{
-		if (obj == this)
+		if (obj == this) {
 			return true;
-
+		}
 		if (obj != null && getClass().equals(obj.getClass()))
 		{
 			final system.proxies.ProcessedQueueTask that = (system.proxies.ProcessedQueueTask) obj;
@@ -644,7 +887,7 @@ public class ProcessedQueueTask
 	 */
 	public static java.lang.String getType()
 	{
-		return "System.ProcessedQueueTask";
+		return entityName;
 	}
 
 	/**

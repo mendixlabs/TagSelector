@@ -53,9 +53,19 @@
                     <attributeType name="String"/>
                 </attributeTypes>
             </property>
+        </propertyGroup>
+         <propertyGroup caption="Advanced">
             <property key="enableCreate" type="boolean" defaultValue="true">
                 <caption>Enable Create</caption>
                 <description>Enable the Tag Selector to create tags when none are found.</description>
+            </property>
+            <property key="enableComma" type="boolean" defaultValue="false">
+                <caption>Enable Comma</caption>
+                <description>Enables tag creation with additional keyboard shortcut 'Comma'</description>
+            </property>
+             <property key="enableSpace" type="boolean" defaultValue="false">
+                <caption>Enable Space</caption>
+                <description>Enables tag creation with additional keyboard shortcut 'Space'</description>
             </property>
         </propertyGroup>
 
