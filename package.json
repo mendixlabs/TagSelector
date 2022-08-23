@@ -27,7 +27,7 @@
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": "^9.4.3",
     "@types/big.js": "^4.0.5",
-    "@types/classnames": "^2.2.4",
+    "@types/classnames": "^2.3.1",
     "@types/enzyme": "^3.1.10",
     "@types/enzyme-adapter-react-16": "^1.0.2",
     "@types/jest": "^24.0.0",
